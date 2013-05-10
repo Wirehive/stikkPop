@@ -2,7 +2,6 @@ C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\bin\Debug\stikkPop.exe.c
 C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\bin\Debug\stikkPop.exe
 C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\bin\Debug\stikkPop.pdb
 C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Debug\stikkPop.csprojResolveAssemblyReference.cache
-C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Debug\stikkPop.Form1.resources
 C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Debug\stikkPop.Properties.Resources.resources
 C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Debug\stikkPop.csproj.GenerateResource.Cache
 C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Debug\stikkPop.exe
@@ -16,3 +15,5 @@ C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Debug\stikkPop.pdb
 \\dc1\FolderRedirections\Simon\My Documents\Visual Studio 2012\Projects\stikkPop\stikkPop\obj\Debug\stikkPop.Form1.resources
 \\dc1\FolderRedirections\Simon\My Documents\Visual Studio 2012\Projects\stikkPop\stikkPop\obj\Debug\stikkPop.Properties.Resources.resources
 \\dc1\FolderRedirections\Simon\My Documents\Visual Studio 2012\Projects\stikkPop\stikkPop\obj\Debug\stikkPop.csproj.GenerateResource.Cache
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Debug\stikkPop.Configure.resources
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Debug\stikkPop.Main.resources

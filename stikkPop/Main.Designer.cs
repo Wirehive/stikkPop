@@ -1,6 +1,6 @@
 ﻿namespace stikkPop
 {
-    partial class Form1
+    partial class Main
     {
         /// <summary>
         /// Required designer variable.
@@ -28,18 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.PasteClipboardButton = new System.Windows.Forms.Button();
             this.urlBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.CopyLinkButton = new System.Windows.Forms.Button();
+            this.syntaxBox = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.privateCheckBox = new System.Windows.Forms.CheckBox();
+            this.titleBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(173, 100);
+            this.linkLabel1.Location = new System.Drawing.Point(173, 205);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(52, 13);
             this.linkLabel1.TabIndex = 0;
@@ -60,12 +65,11 @@
             // 
             // urlBox
             // 
-            this.urlBox.Enabled = false;
+            this.urlBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.urlBox.Location = new System.Drawing.Point(13, 67);
             this.urlBox.Name = "urlBox";
             this.urlBox.Size = new System.Drawing.Size(180, 20);
             this.urlBox.TabIndex = 2;
-            this.urlBox.Text = "http://url.com/paste";
             this.urlBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
@@ -86,20 +90,70 @@
             this.CopyLinkButton.Size = new System.Drawing.Size(25, 23);
             this.CopyLinkButton.TabIndex = 4;
             this.CopyLinkButton.UseVisualStyleBackColor = true;
+            this.CopyLinkButton.Click += new System.EventHandler(this.CopyLinkButton_Click);
             // 
-            // Form1
+            // syntaxBox
+            // 
+            this.syntaxBox.FormattingEnabled = true;
+            this.syntaxBox.Location = new System.Drawing.Point(13, 166);
+            this.syntaxBox.Name = "syntaxBox";
+            this.syntaxBox.Size = new System.Drawing.Size(212, 21);
+            this.syntaxBox.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 150);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(97, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Syntax Highlighting";
+            // 
+            // privateCheckBox
+            // 
+            this.privateCheckBox.AutoSize = true;
+            this.privateCheckBox.Location = new System.Drawing.Point(16, 201);
+            this.privateCheckBox.Name = "privateCheckBox";
+            this.privateCheckBox.Size = new System.Drawing.Size(59, 17);
+            this.privateCheckBox.TabIndex = 7;
+            this.privateCheckBox.Text = "Private";
+            this.privateCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // titleBox
+            // 
+            this.titleBox.Location = new System.Drawing.Point(13, 117);
+            this.titleBox.Name = "titleBox";
+            this.titleBox.Size = new System.Drawing.Size(212, 20);
+            this.titleBox.TabIndex = 8;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 101);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(27, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Title";
+            // 
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(237, 131);
+            this.ClientSize = new System.Drawing.Size(237, 225);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.titleBox);
+            this.Controls.Add(this.privateCheckBox);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.syntaxBox);
             this.Controls.Add(this.CopyLinkButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.urlBox);
             this.Controls.Add(this.PasteClipboardButton);
             this.Controls.Add(this.linkLabel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "Form1";
+            this.Name = "Main";
             this.Text = "stikkPop";
+            this.Load += new System.EventHandler(this.Main_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -112,6 +166,11 @@
         private System.Windows.Forms.TextBox urlBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button CopyLinkButton;
+        private System.Windows.Forms.ComboBox syntaxBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox privateCheckBox;
+        private System.Windows.Forms.TextBox titleBox;
+        private System.Windows.Forms.Label label3;
     }
 }
 

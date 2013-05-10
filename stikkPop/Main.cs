@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.IO;
+using System.Web;
 
 namespace stikkPop
 {
 
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
         string pasteURL;
         string pasteText;
@@ -28,14 +29,15 @@ namespace stikkPop
             return returnText;
         }
 
-        public Form1()
+        public Main()
         {
             InitializeComponent();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            Configure configureDialog = new Configure();
+            configureDialog.ShowDialog();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -47,17 +49,25 @@ namespace stikkPop
         {
             pasteText = GetClipboardText();
             
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://paste.wirehive.net/api/create");
+            HttpWebRequest request = WebRequest.Create("http://paste.wirehive.net/api/create") as HttpWebRequest;
             request.Method = "POST";
-            string boundary = Guid.NewGuid().ToString().Replace("-", "");
-            request.ContentType = "multipart/form-data; boundary=" + boundary;
+            request.ContentType = "application/x-www-form-urlencoded";
 
-            string postData = string.Format("text=hello");
-            byte[] post = Encoding.UTF8.GetBytes(postData);
+            ASCIIEncoding encoding = new ASCIIEncoding();
+            string postData = "";
+            pasteText = HttpUtility.UrlEncode(pasteText);
+            postData += "text="+pasteText;
+            postData += "&lang=" + syntaxBox.SelectedValue;
+            postData += "&title=" + titleBox.Text;
 
-            Stream stream = request.GetRequestStream();
-            stream.Write(post, 0, post.Length);
-            stream.Close();
+            byte[] post = encoding.GetBytes(postData);
+            request.ContentLength = post.Length;
+
+            using (Stream output = request.GetRequestStream())
+            {
+                output.Write(post, 0, post.Length);
+            }
+
 
             using (var response = (HttpWebResponse)request.GetResponse())
             {
@@ -84,6 +94,16 @@ namespace stikkPop
 
             urlBox.Text = pasteURL;
 
+        }
+
+        private void CopyLinkButton_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(urlBox.Text);
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+            syntaxBox.DataSource = syntaxManager.syntaxList;
         }
     }
 }
