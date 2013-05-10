@@ -33,6 +33,7 @@ namespace stikkPop
             Settings.Default["endpoint"] = endpointBox.Text;
             Settings.Default["syntax"] = syntaxBox.SelectedValue;
             Settings.Default["name"] = nameBox.Text;
+            Settings.Default["alwaysPrivate"] = privateCheckBox.Checked;
             Settings.Default.Save();
             this.Close();
         }
@@ -43,6 +44,12 @@ namespace stikkPop
             syntaxBox.SelectedItem = Settings.Default["syntax"];
             endpointBox.Text = Settings.Default["endpoint"].ToString();
             nameBox.Text = Settings.Default["name"].ToString();
+            privateCheckBox.Checked = (bool)Settings.Default["alwaysPrivate"];
+        }
+
+        private void privateCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

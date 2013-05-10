@@ -89,5 +89,17 @@ namespace stikkPop.Properties {
                 this["availableSyntax"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool alwaysPrivate {
+            get {
+                return ((bool)(this["alwaysPrivate"]));
+            }
+            set {
+                this["alwaysPrivate"] = value;
+            }
+        }
     }
 }

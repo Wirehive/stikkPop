@@ -175,11 +175,14 @@
             this.privateCheckBox.TabIndex = 12;
             this.privateCheckBox.Text = "Always Private";
             this.privateCheckBox.UseVisualStyleBackColor = true;
+            this.privateCheckBox.CheckedChanged += new System.EventHandler(this.privateCheckBox_CheckedChanged);
             // 
             // Configure
             // 
+            this.AcceptButton = this.SaveBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.CancelBtn;
             this.ClientSize = new System.Drawing.Size(349, 271);
             this.Controls.Add(this.privateCheckBox);
             this.Controls.Add(this.label7);
