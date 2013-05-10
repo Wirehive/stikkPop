@@ -1,0 +1,14 @@
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\bin\Release\stikkPop.exe.config
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\bin\Release\stikkPop.exe
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\bin\Release\stikkPop.pdb
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Release\stikkPop.Configure.resources
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Release\stikkPop.Main.resources
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Release\stikkPop.Properties.Resources.resources
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Release\stikkPop.csproj.GenerateResource.Cache
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Release\stikkPop.exe
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Release\stikkPop.pdb
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\bin\Release\stikkPop.exe.manifest
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\bin\Release\stikkPop.application
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Release\stikkPop.csprojResolveAssemblyReference.cache
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Release\stikkPop.exe.manifest
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Release\stikkPop.application
