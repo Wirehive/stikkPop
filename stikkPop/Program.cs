@@ -14,7 +14,7 @@ namespace stikkPop
         [STAThread]
         static void Main()
         {
-            syntaxManager.loadSyntax();
+            Startup.loadSyntax();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());

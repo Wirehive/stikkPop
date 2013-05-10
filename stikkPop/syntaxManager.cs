@@ -7,7 +7,7 @@ using stikkPop.Properties;
 
 namespace stikkPop
 {
-    public static class syntaxManager
+    public static class Startup
     {
         public static List<String> syntaxList = new List<String>();
 

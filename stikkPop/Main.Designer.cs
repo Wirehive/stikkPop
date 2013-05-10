@@ -39,12 +39,14 @@
             this.privateCheckBox = new System.Windows.Forms.CheckBox();
             this.titleBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(173, 205);
+            this.linkLabel1.Location = new System.Drawing.Point(173, 238);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(52, 13);
             this.linkLabel1.TabIndex = 0;
@@ -112,7 +114,7 @@
             // privateCheckBox
             // 
             this.privateCheckBox.AutoSize = true;
-            this.privateCheckBox.Location = new System.Drawing.Point(16, 201);
+            this.privateCheckBox.Location = new System.Drawing.Point(16, 234);
             this.privateCheckBox.Name = "privateCheckBox";
             this.privateCheckBox.Size = new System.Drawing.Size(59, 17);
             this.privateCheckBox.TabIndex = 7;
@@ -135,11 +137,30 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "Title";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(86, 203);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(139, 20);
+            this.textBox1.TabIndex = 10;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(14, 206);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(66, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Expiry (Mins)";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(237, 225);
+            this.ClientSize = new System.Drawing.Size(237, 265);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.titleBox);
             this.Controls.Add(this.privateCheckBox);
@@ -171,6 +192,8 @@
         private System.Windows.Forms.CheckBox privateCheckBox;
         private System.Windows.Forms.TextBox titleBox;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label4;
     }
 }
 

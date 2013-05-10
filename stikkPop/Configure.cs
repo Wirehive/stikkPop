@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using stikkPop.Properties;
 
 namespace stikkPop
 {
@@ -29,12 +30,19 @@ namespace stikkPop
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
-
+            Settings.Default["endpoint"] = endpointBox.Text;
+            Settings.Default["syntax"] = syntaxBox.SelectedValue;
+            Settings.Default["name"] = nameBox.Text;
+            Settings.Default.Save();
+            this.Close();
         }
 
         private void Configure_Load(object sender, EventArgs e)
         {
-            syntaxBox.DataSource = syntaxManager.syntaxList;
+            syntaxBox.DataSource = Startup.syntaxList;
+            syntaxBox.SelectedItem = Settings.Default["syntax"];
+            endpointBox.Text = Settings.Default["endpoint"].ToString();
+            nameBox.Text = Settings.Default["name"].ToString();
         }
     }
 }

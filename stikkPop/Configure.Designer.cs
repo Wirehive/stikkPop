@@ -38,7 +38,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.syntaxBox = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.nameBox = new System.Windows.Forms.TextBox();
             this.endpointBox = new System.Windows.Forms.TextBox();
             this.privateCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
@@ -147,14 +147,14 @@
             this.label7.TabIndex = 11;
             this.label7.Text = "Syntax highlighting used by pastebin";
             // 
-            // textBox1
+            // nameBox
             // 
-            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::stikkPop.Properties.Settings.Default, "name", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox1.Location = new System.Drawing.Point(97, 75);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(220, 20);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.Text = global::stikkPop.Properties.Settings.Default.name;
+            this.nameBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::stikkPop.Properties.Settings.Default, "name", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nameBox.Location = new System.Drawing.Point(97, 75);
+            this.nameBox.Name = "nameBox";
+            this.nameBox.Size = new System.Drawing.Size(220, 20);
+            this.nameBox.TabIndex = 3;
+            this.nameBox.Text = global::stikkPop.Properties.Settings.Default.name;
             // 
             // endpointBox
             // 
@@ -190,7 +190,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.nameBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.endpointBox);
@@ -208,7 +208,7 @@
         private System.Windows.Forms.TextBox endpointBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox nameBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;

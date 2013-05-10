@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Net;
 using System.IO;
 using System.Web;
+using stikkPop.Properties;
 
 namespace stikkPop
 {
@@ -49,7 +50,7 @@ namespace stikkPop
         {
             pasteText = GetClipboardText();
             
-            HttpWebRequest request = WebRequest.Create("http://paste.wirehive.net/api/create") as HttpWebRequest;
+            HttpWebRequest request = WebRequest.Create(Settings.Default["EndPoint"].ToString()) as HttpWebRequest;
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
 
@@ -103,7 +104,13 @@ namespace stikkPop
 
         private void Main_Load(object sender, EventArgs e)
         {
-            syntaxBox.DataSource = syntaxManager.syntaxList;
+            syntaxBox.DataSource = Startup.syntaxList;
+            syntaxBox.SelectedItem = Settings.Default["syntax"];
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
