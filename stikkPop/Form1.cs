@@ -49,15 +49,15 @@ namespace stikkPop
             
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://paste.wirehive.net/api/create");
             request.Method = "POST";
+            string boundary = Guid.NewGuid().ToString().Replace("-", "");
+            request.ContentType = "multipart/form-data; boundary=" + boundary;
+
             string postData = string.Format("text=hello");
-            byte[] data = Encoding.UTF8.GetBytes(postData);
+            byte[] post = Encoding.UTF8.GetBytes(postData);
 
-            request.ContentLength = data.Length;
-
-            using (Stream requestStream = request.GetRequestStream())
-            {
-                requestStream.Write(data, 0, data.Length);
-            }
+            Stream stream = request.GetRequestStream();
+            stream.Write(post, 0, post.Length);
+            stream.Close();
 
             using (var response = (HttpWebResponse)request.GetResponse())
             {
