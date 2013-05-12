@@ -144,7 +144,7 @@
             this.syntaxBox.Location = new System.Drawing.Point(99, 136);
             this.syntaxBox.Name = "syntaxBox";
             this.syntaxBox.Size = new System.Drawing.Size(218, 21);
-            this.syntaxBox.TabIndex = 10;
+            this.syntaxBox.TabIndex = 3;
             // 
             // label7
             // 
@@ -165,7 +165,7 @@
             this.privateCheckBox.Name = "privateCheckBox";
             this.privateCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.privateCheckBox.Size = new System.Drawing.Size(95, 17);
-            this.privateCheckBox.TabIndex = 12;
+            this.privateCheckBox.TabIndex = 4;
             this.privateCheckBox.Text = "Always Private";
             this.privateCheckBox.UseVisualStyleBackColor = true;
             this.privateCheckBox.CheckedChanged += new System.EventHandler(this.privateCheckBox_CheckedChanged);
@@ -198,7 +198,7 @@
             this.autoCopyCheckBox.Name = "autoCopyCheckBox";
             this.autoCopyCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.autoCopyCheckBox.Size = new System.Drawing.Size(74, 17);
-            this.autoCopyCheckBox.TabIndex = 15;
+            this.autoCopyCheckBox.TabIndex = 5;
             this.autoCopyCheckBox.Text = "Auto copy";
             this.autoCopyCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -245,7 +245,7 @@
             this.autoOpenCheckBox.Name = "autoOpenCheckBox";
             this.autoOpenCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.autoOpenCheckBox.Size = new System.Drawing.Size(75, 17);
-            this.autoOpenCheckBox.TabIndex = 18;
+            this.autoOpenCheckBox.TabIndex = 6;
             this.autoOpenCheckBox.Text = "Auto open";
             this.autoOpenCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -255,7 +255,7 @@
             this.nameBox.Location = new System.Drawing.Point(97, 75);
             this.nameBox.Name = "nameBox";
             this.nameBox.Size = new System.Drawing.Size(220, 20);
-            this.nameBox.TabIndex = 3;
+            this.nameBox.TabIndex = 2;
             this.nameBox.Text = global::stikkPop.Properties.Settings.Default.name;
             // 
             // endpointBox
@@ -264,7 +264,7 @@
             this.endpointBox.Location = new System.Drawing.Point(97, 28);
             this.endpointBox.Name = "endpointBox";
             this.endpointBox.Size = new System.Drawing.Size(220, 20);
-            this.endpointBox.TabIndex = 0;
+            this.endpointBox.TabIndex = 1;
             this.endpointBox.Text = global::stikkPop.Properties.Settings.Default.endpoint;
             // 
             // Configure

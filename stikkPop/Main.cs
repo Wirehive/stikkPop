@@ -33,10 +33,12 @@ namespace stikkPop
         public Main()
         {
             InitializeComponent();
+            Configure configureDialog = new Configure();
             this.KeyDown += Main_KeyDown;
+
+            //Is initial config needed?
             if (Settings.Default["EndPoint"].ToString() == string.Empty)
             {
-                Configure configureDialog = new Configure();
                 configureDialog.ShowDialog();
             }
         }
@@ -49,24 +51,24 @@ namespace stikkPop
             }
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void configureLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Configure configureDialog = new Configure();
             configureDialog.ShowDialog();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void pasteButton_Click(object sender, EventArgs e)
         {
-            PasteText();
+            string pasteText = GetClipboardText();
+            PasteText(pasteText);
         }
 
-        private void PasteText()
+        private void PasteText(string pasteText)
         {
             List<string> errors = new List<string>();
 
             if (ValidateInput(errors))
             {
-                pasteText = GetClipboardText();
                 pasteText = HttpUtility.UrlEncode(pasteText);
                 if (privateCheckBox.Checked == true)
                 {
@@ -177,7 +179,11 @@ namespace stikkPop
 
         private void CopyLinkButton_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(urlBox.Text);
+            try
+            {
+                Clipboard.SetText(urlBox.Text);
+            }
+            catch { }
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -208,27 +214,15 @@ namespace stikkPop
             this.expiryBox.ValueMember = "Value";
 
             this.syntaxBox.KeyUp += new KeyEventHandler(this.syntaxBox_KeyUp);
-
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void urlLabel_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void expiryBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start(urlBox.Text);
-        }
-
-        private void syntaxBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            try
+            {
+                System.Diagnostics.Process.Start(urlBox.Text);
+            }
+            catch { }
         }
 
         private void syntaxBox_KeyUp(object sender, KeyEventArgs e)
@@ -273,9 +267,10 @@ namespace stikkPop
             }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void composeButton_Click(object sender, EventArgs e)
         {
-
+            Composer composerDialog = new Composer();
+            composerDialog.Show();
         }
     }
     public class Expiry
