@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Composer));
             this.composedTextBox = new System.Windows.Forms.TextBox();
             this.SubmitButton = new System.Windows.Forms.Button();
+            this.invertCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // composedTextBox
@@ -40,8 +41,8 @@
             this.composedTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.composedTextBox.BackColor = System.Drawing.SystemColors.WindowText;
-            this.composedTextBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.composedTextBox.BackColor = System.Drawing.SystemColors.Window;
+            this.composedTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
             this.composedTextBox.Location = new System.Drawing.Point(12, 12);
             this.composedTextBox.Multiline = true;
             this.composedTextBox.Name = "composedTextBox";
@@ -60,11 +61,26 @@
             this.SubmitButton.UseVisualStyleBackColor = true;
             this.SubmitButton.Click += new System.EventHandler(this.SubmitButton_Click);
             // 
+            // invertCheckBox
+            // 
+            this.invertCheckBox.AutoSize = true;
+            this.invertCheckBox.Checked = global::stikkPop.Properties.Settings.Default.invertColours;
+            this.invertCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::stikkPop.Properties.Settings.Default, "invertColours", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.invertCheckBox.Location = new System.Drawing.Point(487, 421);
+            this.invertCheckBox.Name = "invertCheckBox";
+            this.invertCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.invertCheckBox.Size = new System.Drawing.Size(91, 17);
+            this.invertCheckBox.TabIndex = 2;
+            this.invertCheckBox.Text = "Invert Colours";
+            this.invertCheckBox.UseVisualStyleBackColor = true;
+            this.invertCheckBox.CheckedChanged += new System.EventHandler(this.invertCheckBox_CheckedChanged);
+            // 
             // Composer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(590, 452);
+            this.Controls.Add(this.invertCheckBox);
             this.Controls.Add(this.SubmitButton);
             this.Controls.Add(this.composedTextBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -80,5 +96,6 @@
 
         private System.Windows.Forms.TextBox composedTextBox;
         private System.Windows.Forms.Button SubmitButton;
+        private System.Windows.Forms.CheckBox invertCheckBox;
     }
 }

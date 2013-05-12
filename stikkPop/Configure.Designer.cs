@@ -56,11 +56,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 31);
+            this.label1.Location = new System.Drawing.Point(9, 31);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 13);
+            this.label1.Size = new System.Drawing.Size(87, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "API Endpoint";
+            this.label1.Text = "Stikked Location";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -80,9 +81,9 @@
             this.label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.label3.Location = new System.Drawing.Point(94, 51);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(160, 13);
+            this.label3.Size = new System.Drawing.Size(146, 13);
             this.label3.TabIndex = 4;
-            this.label3.Text = "eg http://paste.website.com/api";
+            this.label3.Text = "eg http://paste.website.com/";
             // 
             // label4
             // 
@@ -161,6 +162,8 @@
             // privateCheckBox
             // 
             this.privateCheckBox.AutoSize = true;
+            this.privateCheckBox.Checked = global::stikkPop.Properties.Settings.Default.alwaysPrivate;
+            this.privateCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::stikkPop.Properties.Settings.Default, "alwaysPrivate", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.privateCheckBox.Location = new System.Drawing.Point(18, 185);
             this.privateCheckBox.Name = "privateCheckBox";
             this.privateCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -194,6 +197,8 @@
             // autoCopyCheckBox
             // 
             this.autoCopyCheckBox.AutoSize = true;
+            this.autoCopyCheckBox.Checked = global::stikkPop.Properties.Settings.Default.autoCopy;
+            this.autoCopyCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::stikkPop.Properties.Settings.Default, "autoCopy", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.autoCopyCheckBox.Location = new System.Drawing.Point(39, 208);
             this.autoCopyCheckBox.Name = "autoCopyCheckBox";
             this.autoCopyCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -241,6 +246,8 @@
             // autoOpenCheckBox
             // 
             this.autoOpenCheckBox.AutoSize = true;
+            this.autoOpenCheckBox.Checked = global::stikkPop.Properties.Settings.Default.autoOpen;
+            this.autoOpenCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::stikkPop.Properties.Settings.Default, "autoOpen", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.autoOpenCheckBox.Location = new System.Drawing.Point(38, 231);
             this.autoOpenCheckBox.Name = "autoOpenCheckBox";
             this.autoOpenCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;

@@ -44,13 +44,14 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.composeButton = new System.Windows.Forms.Button();
+            this.openStikkedLink = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // configureLink
             // 
             this.configureLink.AutoSize = true;
-            this.configureLink.Location = new System.Drawing.Point(173, 286);
+            this.configureLink.Location = new System.Drawing.Point(173, 272);
             this.configureLink.Name = "configureLink";
             this.configureLink.Size = new System.Drawing.Size(52, 13);
             this.configureLink.TabIndex = 9;
@@ -180,7 +181,7 @@
             // 
             // composeButton
             // 
-            this.composeButton.Location = new System.Drawing.Point(13, 242);
+            this.composeButton.Location = new System.Drawing.Point(13, 239);
             this.composeButton.Name = "composeButton";
             this.composeButton.Size = new System.Drawing.Size(212, 25);
             this.composeButton.TabIndex = 8;
@@ -188,12 +189,25 @@
             this.composeButton.UseVisualStyleBackColor = true;
             this.composeButton.Click += new System.EventHandler(this.composeButton_Click);
             // 
+            // openStikkedLink
+            // 
+            this.openStikkedLink.AutoSize = true;
+            this.openStikkedLink.Location = new System.Drawing.Point(13, 273);
+            this.openStikkedLink.Name = "openStikkedLink";
+            this.openStikkedLink.Size = new System.Drawing.Size(72, 13);
+            this.openStikkedLink.TabIndex = 15;
+            this.openStikkedLink.TabStop = true;
+            this.openStikkedLink.Text = "Open Stikked";
+            this.openStikkedLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.openStikkedLink_LinkClicked);
+            // 
             // Main
             // 
             this.AcceptButton = this.PasteClipboardButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(239, 309);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(239, 301);
+            this.Controls.Add(this.openStikkedLink);
             this.Controls.Add(this.composeButton);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.expiryBox);
@@ -238,6 +252,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button composeButton;
+        private System.Windows.Forms.LinkLabel openStikkedLink;
     }
 }
 

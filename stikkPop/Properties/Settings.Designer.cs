@@ -125,5 +125,17 @@ namespace stikkPop.Properties {
                 this["autoOpen"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool invertColours {
+            get {
+                return ((bool)(this["invertColours"]));
+            }
+            set {
+                this["invertColours"] = value;
+            }
+        }
     }
 }

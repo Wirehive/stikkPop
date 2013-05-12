@@ -41,6 +41,8 @@ namespace stikkPop
             {
                 configureDialog.ShowDialog();
             }
+
+            syntaxBox.SelectedItem = Settings.Default["syntax"];
         }
 
         void Main_KeyDown(object sender, KeyEventArgs e)
@@ -68,6 +70,8 @@ namespace stikkPop
         {
             List<string> errors = new List<string>();
 
+            string endpointURL = Settings.Default["EndPoint"].ToString() + "/api/create";
+
             if (ValidateInput(errors))
             {
                 pasteText = HttpUtility.UrlEncode(pasteText);
@@ -81,11 +85,11 @@ namespace stikkPop
 
                 try
                 {
-                    PostData(pasteText, name);
+                    PostData(pasteText, name, endpointURL);
                 }
                 catch 
                 {
-                    MessageBox.Show("API Unreachable:\n " + Settings.Default["EndPoint"].ToString());
+                    MessageBox.Show("API Unreachable:\n " + endpointURL);
                 }
 
             }
@@ -95,8 +99,6 @@ namespace stikkPop
 
                 if (errors.Count > 0)
                 {
-                    //sbErrors.AppendLine("The following errors occured:");
-
                     foreach (string error in errors)
                     {
                         sbErrors.AppendLine(error);
@@ -107,9 +109,9 @@ namespace stikkPop
             }
         }
 
-        private void PostData(string pasteText, string name)
+        private void PostData(string pasteText, string name, string url)
         {
-            HttpWebRequest request = WebRequest.Create(Settings.Default["EndPoint"].ToString()) as HttpWebRequest;
+            HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
 
@@ -278,6 +280,11 @@ namespace stikkPop
         {
             Composer composerDialog = new Composer(this);
             composerDialog.Show();
+        }
+
+        private void openStikkedLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(Settings.Default["EndPoint"].ToString());
         }
     }
     public class Expiry
