@@ -16,3 +16,7 @@ C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Debug\stikkPop.pdb
 \\dc1\FolderRedirections\Simon\My Documents\Visual Studio 2012\Projects\stikkPop\stikkPop\obj\Debug\stikkPop.csproj.GenerateResource.Cache
 C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Debug\stikkPop.Configure.resources
 C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Debug\stikkPop.Main.resources
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\bin\Debug\stikkPop.exe.manifest
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\bin\Debug\stikkPop.application
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Debug\stikkPop.exe.manifest
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Debug\stikkPop.application

@@ -41,6 +41,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.expiryBox = new System.Windows.Forms.ComboBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // linkLabel1
@@ -57,7 +60,7 @@
             // PasteClipboardButton
             // 
             this.PasteClipboardButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.PasteClipboardButton.Location = new System.Drawing.Point(72, 12);
+            this.PasteClipboardButton.Location = new System.Drawing.Point(129, 12);
             this.PasteClipboardButton.Name = "PasteClipboardButton";
             this.PasteClipboardButton.Size = new System.Drawing.Size(96, 23);
             this.PasteClipboardButton.TabIndex = 1;
@@ -158,12 +161,31 @@
             this.expiryBox.Size = new System.Drawing.Size(139, 21);
             this.expiryBox.TabIndex = 12;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(13, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(97, 33);
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(150, 38);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(43, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "or Ctrl-v";
+            // 
             // Main
             // 
             this.AcceptButton = this.PasteClipboardButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(239, 265);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.expiryBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -176,11 +198,13 @@
             this.Controls.Add(this.urlBox);
             this.Controls.Add(this.PasteClipboardButton);
             this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "Main";
             this.Text = "stikkPop";
             this.Load += new System.EventHandler(this.Main_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,6 +224,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox expiryBox;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label5;
     }
 }
 
