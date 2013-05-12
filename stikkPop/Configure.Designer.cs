@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Configure));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -41,6 +42,10 @@
             this.nameBox = new System.Windows.Forms.TextBox();
             this.endpointBox = new System.Windows.Forms.TextBox();
             this.privateCheckBox = new System.Windows.Forms.CheckBox();
+            this.tick = new System.Windows.Forms.PictureBox();
+            this.cross = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.tick)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cross)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -110,6 +115,7 @@
             // 
             // CancelBtn
             // 
+            this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.CancelBtn.Location = new System.Drawing.Point(81, 218);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.Size = new System.Drawing.Size(75, 23);
@@ -177,6 +183,27 @@
             this.privateCheckBox.UseVisualStyleBackColor = true;
             this.privateCheckBox.CheckedChanged += new System.EventHandler(this.privateCheckBox_CheckedChanged);
             // 
+            // tick
+            // 
+            this.tick.Image = ((System.Drawing.Image)(resources.GetObject("tick.Image")));
+            this.tick.Location = new System.Drawing.Point(323, 28);
+            this.tick.Name = "tick";
+            this.tick.Size = new System.Drawing.Size(25, 20);
+            this.tick.TabIndex = 13;
+            this.tick.TabStop = false;
+            this.tick.Visible = false;
+            this.tick.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // cross
+            // 
+            this.cross.Image = ((System.Drawing.Image)(resources.GetObject("cross.Image")));
+            this.cross.Location = new System.Drawing.Point(323, 28);
+            this.cross.Name = "cross";
+            this.cross.Size = new System.Drawing.Size(25, 20);
+            this.cross.TabIndex = 14;
+            this.cross.TabStop = false;
+            this.cross.Visible = false;
+            // 
             // Configure
             // 
             this.AcceptButton = this.SaveBtn;
@@ -184,6 +211,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
             this.ClientSize = new System.Drawing.Size(349, 271);
+            this.Controls.Add(this.cross);
+            this.Controls.Add(this.tick);
             this.Controls.Add(this.privateCheckBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.syntaxBox);
@@ -201,6 +230,8 @@
             this.Name = "Configure";
             this.Text = "Configure";
             this.Load += new System.EventHandler(this.Configure_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.tick)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cross)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -221,5 +252,7 @@
         private System.Windows.Forms.ComboBox syntaxBox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox privateCheckBox;
+        private System.Windows.Forms.PictureBox tick;
+        private System.Windows.Forms.PictureBox cross;
     }
 }

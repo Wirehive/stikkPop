@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.configureLink = new System.Windows.Forms.LinkLabel();
             this.PasteClipboardButton = new System.Windows.Forms.Button();
             this.urlBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,16 +46,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // linkLabel1
+            // configureLink
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(173, 238);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(52, 13);
-            this.linkLabel1.TabIndex = 0;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Configure";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.configureLink.AutoSize = true;
+            this.configureLink.Location = new System.Drawing.Point(173, 238);
+            this.configureLink.Name = "configureLink";
+            this.configureLink.Size = new System.Drawing.Size(52, 13);
+            this.configureLink.TabIndex = 0;
+            this.configureLink.TabStop = true;
+            this.configureLink.Text = "Configure";
+            this.configureLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // PasteClipboardButton
             // 
@@ -75,7 +75,6 @@
             this.urlBox.Name = "urlBox";
             this.urlBox.Size = new System.Drawing.Size(180, 20);
             this.urlBox.TabIndex = 2;
-            this.urlBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
@@ -197,9 +196,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.urlBox);
             this.Controls.Add(this.PasteClipboardButton);
-            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.configureLink);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "Main";
             this.Text = "stikkPop";
@@ -212,7 +212,7 @@
 
         #endregion
 
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel configureLink;
         private System.Windows.Forms.Button PasteClipboardButton;
         private System.Windows.Forms.TextBox urlBox;
         private System.Windows.Forms.Label label1;
