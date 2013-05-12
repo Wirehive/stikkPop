@@ -34,6 +34,11 @@ namespace stikkPop
         {
             InitializeComponent();
             this.KeyDown += Main_KeyDown;
+            if (Settings.Default["EndPoint"].ToString() == string.Empty)
+            {
+                Configure configureDialog = new Configure();
+                configureDialog.ShowDialog();
+            }
         }
 
         void Main_KeyDown(object sender, KeyEventArgs e)
@@ -70,51 +75,59 @@ namespace stikkPop
                 string name = (string)Settings.Default["name"];
                 name = HttpUtility.UrlEncode(name);
 
-                HttpWebRequest request = WebRequest.Create(Settings.Default["EndPoint"].ToString()) as HttpWebRequest;
-                request.Method = "POST";
-                request.ContentType = "application/x-www-form-urlencoded";
-
-                ASCIIEncoding encoding = new ASCIIEncoding();
-                string postData = "";
-                postData += "text=" + pasteText;
-                postData += "&lang=" + syntaxBox.SelectedValue;
-                postData += "&title=" + titleBox.Text;
-                postData += "&private=" + isPrivate;
-                postData += "&name=" + name;
-                postData += "&expire=" + expiryBox.ValueMember;
-
-                byte[] post = encoding.GetBytes(postData);
-                request.ContentLength = post.Length;
-
-                using (Stream output = request.GetRequestStream())
+                try
                 {
-                    output.Write(post, 0, post.Length);
-                }
+                    HttpWebRequest request = WebRequest.Create(Settings.Default["EndPoint"].ToString()) as HttpWebRequest;
+                    request.Method = "POST";
+                    request.ContentType = "application/x-www-form-urlencoded";
 
-                using (var response = (HttpWebResponse)request.GetResponse())
-                {
-                    var responseValue = string.Empty;
+                    ASCIIEncoding encoding = new ASCIIEncoding();
+                    string postData = "";
+                    postData += "text=" + pasteText;
+                    postData += "&lang=" + syntaxBox.SelectedValue;
+                    postData += "&title=" + titleBox.Text;
+                    postData += "&private=" + isPrivate;
+                    postData += "&name=" + name;
+                    postData += "&expire=" + expiryBox.ValueMember;
 
-                    if (response.StatusCode != HttpStatusCode.OK)
+                    byte[] post = encoding.GetBytes(postData);
+                    request.ContentLength = post.Length;
+
+                    using (Stream output = request.GetRequestStream())
                     {
-                        var message = String.Format("Request failed. Received HTTP {0}", response.StatusCode);
-                        throw new ApplicationException(message);
+                        output.Write(post, 0, post.Length);
                     }
 
-                    // grab the response
-                    using (var responseStream = response.GetResponseStream())
+                    using (var response = (HttpWebResponse)request.GetResponse())
                     {
-                        if (responseStream != null)
-                            using (var reader = new StreamReader(responseStream))
-                            {
-                                responseValue = reader.ReadToEnd();
-                            }
+                        var responseValue = string.Empty;
+
+                        if (response.StatusCode != HttpStatusCode.OK)
+                        {
+                            var message = String.Format("Request failed. Received HTTP {0}", response.StatusCode);
+                            throw new ApplicationException(message);
+                        }
+
+                        // grab the response
+                        using (var responseStream = response.GetResponseStream())
+                        {
+                            if (responseStream != null)
+                                using (var reader = new StreamReader(responseStream))
+                                {
+                                    responseValue = reader.ReadToEnd();
+                                }
+                        }
+
+                        pasteURL = responseValue;
                     }
 
-                    pasteURL = responseValue;
+                    urlBox.Text = pasteURL;
+                }
+                catch 
+                {
+                    MessageBox.Show("API Unreachable:\n " + Settings.Default["EndPoint"].ToString());
                 }
 
-                urlBox.Text = pasteURL;
             }
             else
             {
@@ -122,7 +135,7 @@ namespace stikkPop
 
                 if (errors.Count > 0)
                 {
-                    sbErrors.AppendLine("The following errors occured:");
+                    //sbErrors.AppendLine("The following errors occured:");
 
                     foreach (string error in errors)
                     {
@@ -141,7 +154,7 @@ namespace stikkPop
             if (Settings.Default["EndPoint"].ToString() == string.Empty)
             {
                 isValid = false;
-                errors.Add("EndPoint not found");
+                errors.Add("API Endpoint has not been set.");
             }
 
             return isValid;
