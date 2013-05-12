@@ -47,7 +47,8 @@ namespace stikkPop
         {
             if (e.KeyCode == Keys.V && e.Modifiers == Keys.Control)
             {
-                PasteText();
+                string pasteText = GetClipboardText();
+                PasteText(pasteText);
             }
         }
 
@@ -63,7 +64,7 @@ namespace stikkPop
             PasteText(pasteText);
         }
 
-        private void PasteText(string pasteText)
+        public void PasteText(string pasteText)
         {
             List<string> errors = new List<string>();
 
@@ -74,71 +75,13 @@ namespace stikkPop
                 {
                     isPrivate = "1";
                 }
+
                 string name = (string)Settings.Default["name"];
                 name = HttpUtility.UrlEncode(name);
 
                 try
                 {
-                    HttpWebRequest request = WebRequest.Create(Settings.Default["EndPoint"].ToString()) as HttpWebRequest;
-                    request.Method = "POST";
-                    request.ContentType = "application/x-www-form-urlencoded";
-
-                    ASCIIEncoding encoding = new ASCIIEncoding();
-                    string postData = "";
-                    postData += "text=" + pasteText;
-                    postData += "&lang=" + syntaxBox.SelectedValue;
-                    postData += "&title=" + titleBox.Text;
-                    postData += "&private=" + isPrivate;
-                    postData += "&name=" + name;
-                    postData += "&expire=" + expiryBox.ValueMember;
-
-                    byte[] post = encoding.GetBytes(postData);
-                    request.ContentLength = post.Length;
-
-                    using (Stream output = request.GetRequestStream())
-                    {
-                        output.Write(post, 0, post.Length);
-                    }
-
-                    using (var response = (HttpWebResponse)request.GetResponse())
-                    {
-                        var responseValue = string.Empty;
-
-                        if (response.StatusCode != HttpStatusCode.OK)
-                        {
-                            var message = String.Format("Request failed. Received HTTP {0}", response.StatusCode);
-                            throw new ApplicationException(message);
-                        }
-
-                        // grab the response
-                        using (var responseStream = response.GetResponseStream())
-                        {
-                            if (responseStream != null)
-                                using (var reader = new StreamReader(responseStream))
-                                {
-                                    responseValue = reader.ReadToEnd();
-                                }
-                        }
-
-                        pasteURL = responseValue;
-                    }
-
-                    urlBox.Text = pasteURL;
-
-                    if ((bool)Settings.Default["autoCopy"] == true)
-                    {
-                        Clipboard.SetText(urlBox.Text);
-                        PastedURLLabel.Text = "Pasted URL (Auto-copied)";
-                    }
-                    else 
-                    { 
-                        PastedURLLabel.Text = "Pasted URL";
-                    }
-
-                    if ((bool)Settings.Default["autoOpen"] == true)
-                    {
-                        System.Diagnostics.Process.Start(urlBox.Text);
-                    }
+                    PostData(pasteText, name);
                 }
                 catch 
                 {
@@ -164,7 +107,71 @@ namespace stikkPop
             }
         }
 
-        private bool ValidateInput(List<string> errors)
+        private void PostData(string pasteText, string name)
+        {
+            HttpWebRequest request = WebRequest.Create(Settings.Default["EndPoint"].ToString()) as HttpWebRequest;
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+
+            ASCIIEncoding encoding = new ASCIIEncoding();
+            string postData = "";
+            postData += "text=" + pasteText;
+            postData += "&lang=" + syntaxBox.SelectedValue;
+            postData += "&title=" + titleBox.Text;
+            postData += "&private=" + isPrivate;
+            postData += "&name=" + name;
+            postData += "&expire=" + expiryBox.ValueMember;
+
+            byte[] post = encoding.GetBytes(postData);
+            request.ContentLength = post.Length;
+
+            using (Stream output = request.GetRequestStream())
+            {
+                output.Write(post, 0, post.Length);
+            }
+
+            using (var response = (HttpWebResponse)request.GetResponse())
+            {
+                var responseValue = string.Empty;
+
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    var message = String.Format("Request failed. Received HTTP {0}", response.StatusCode);
+                    throw new ApplicationException(message);
+                }
+
+                // grab the response
+                using (var responseStream = response.GetResponseStream())
+                {
+                    if (responseStream != null)
+                        using (var reader = new StreamReader(responseStream))
+                        {
+                            responseValue = reader.ReadToEnd();
+                        }
+                }
+
+                pasteURL = responseValue;
+            }
+
+            urlBox.Text = pasteURL;
+
+            if ((bool)Settings.Default["autoCopy"] == true)
+            {
+                Clipboard.SetText(urlBox.Text);
+                PastedURLLabel.Text = "Pasted URL (Auto-copied)";
+            }
+            else
+            {
+                PastedURLLabel.Text = "Pasted URL";
+            }
+
+            if ((bool)Settings.Default["autoOpen"] == true)
+            {
+                System.Diagnostics.Process.Start(urlBox.Text);
+            }
+        }
+
+        private static bool ValidateInput(List<string> errors)
         {
             bool isValid = true;
 
@@ -269,7 +276,7 @@ namespace stikkPop
 
         private void composeButton_Click(object sender, EventArgs e)
         {
-            Composer composerDialog = new Composer();
+            Composer composerDialog = new Composer(this);
             composerDialog.Show();
         }
     }

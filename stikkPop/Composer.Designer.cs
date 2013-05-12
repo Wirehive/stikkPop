@@ -40,9 +40,12 @@
             this.composedTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.composedTextBox.BackColor = System.Drawing.SystemColors.WindowText;
+            this.composedTextBox.ForeColor = System.Drawing.SystemColors.Window;
             this.composedTextBox.Location = new System.Drawing.Point(12, 12);
             this.composedTextBox.Multiline = true;
             this.composedTextBox.Name = "composedTextBox";
+            this.composedTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.composedTextBox.Size = new System.Drawing.Size(566, 399);
             this.composedTextBox.TabIndex = 0;
             // 
@@ -55,6 +58,7 @@
             this.SubmitButton.TabIndex = 1;
             this.SubmitButton.Text = "Submit";
             this.SubmitButton.UseVisualStyleBackColor = true;
+            this.SubmitButton.Click += new System.EventHandler(this.SubmitButton_Click);
             // 
             // Composer
             // 
