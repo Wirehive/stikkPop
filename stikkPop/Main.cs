@@ -122,6 +122,21 @@ namespace stikkPop
                     }
 
                     urlBox.Text = pasteURL;
+
+                    if ((bool)Settings.Default["autoCopy"] == true)
+                    {
+                        Clipboard.SetText(urlBox.Text);
+                        PastedURLLabel.Text = "Pasted URL (Auto-copied)";
+                    }
+                    else 
+                    { 
+                        PastedURLLabel.Text = "Pasted URL";
+                    }
+
+                    if ((bool)Settings.Default["autoOpen"] == true)
+                    {
+                        System.Diagnostics.Process.Start(urlBox.Text);
+                    }
                 }
                 catch 
                 {

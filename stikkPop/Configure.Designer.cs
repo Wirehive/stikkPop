@@ -39,11 +39,16 @@
             this.label6 = new System.Windows.Forms.Label();
             this.syntaxBox = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.nameBox = new System.Windows.Forms.TextBox();
-            this.endpointBox = new System.Windows.Forms.TextBox();
             this.privateCheckBox = new System.Windows.Forms.CheckBox();
             this.tick = new System.Windows.Forms.PictureBox();
             this.cross = new System.Windows.Forms.PictureBox();
+            this.autoCopyCheckBox = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.autoOpenCheckBox = new System.Windows.Forms.CheckBox();
+            this.nameBox = new System.Windows.Forms.TextBox();
+            this.endpointBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.tick)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cross)).BeginInit();
             this.SuspendLayout();
@@ -105,7 +110,7 @@
             // 
             // SaveBtn
             // 
-            this.SaveBtn.Location = new System.Drawing.Point(192, 218);
+            this.SaveBtn.Location = new System.Drawing.Point(190, 261);
             this.SaveBtn.Name = "SaveBtn";
             this.SaveBtn.Size = new System.Drawing.Size(75, 23);
             this.SaveBtn.TabIndex = 7;
@@ -116,7 +121,7 @@
             // CancelBtn
             // 
             this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelBtn.Location = new System.Drawing.Point(81, 218);
+            this.CancelBtn.Location = new System.Drawing.Point(79, 261);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.Size = new System.Drawing.Size(75, 23);
             this.CancelBtn.TabIndex = 8;
@@ -153,24 +158,6 @@
             this.label7.TabIndex = 11;
             this.label7.Text = "Syntax highlighting used by pastebin";
             // 
-            // nameBox
-            // 
-            this.nameBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::stikkPop.Properties.Settings.Default, "name", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.nameBox.Location = new System.Drawing.Point(97, 75);
-            this.nameBox.Name = "nameBox";
-            this.nameBox.Size = new System.Drawing.Size(220, 20);
-            this.nameBox.TabIndex = 3;
-            this.nameBox.Text = global::stikkPop.Properties.Settings.Default.name;
-            // 
-            // endpointBox
-            // 
-            this.endpointBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::stikkPop.Properties.Settings.Default, "endpoint", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.endpointBox.Location = new System.Drawing.Point(97, 28);
-            this.endpointBox.Name = "endpointBox";
-            this.endpointBox.Size = new System.Drawing.Size(220, 20);
-            this.endpointBox.TabIndex = 0;
-            this.endpointBox.Text = global::stikkPop.Properties.Settings.Default.endpoint;
-            // 
             // privateCheckBox
             // 
             this.privateCheckBox.AutoSize = true;
@@ -204,13 +191,94 @@
             this.cross.TabStop = false;
             this.cross.Visible = false;
             // 
+            // autoCopyCheckBox
+            // 
+            this.autoCopyCheckBox.AutoSize = true;
+            this.autoCopyCheckBox.Location = new System.Drawing.Point(39, 208);
+            this.autoCopyCheckBox.Name = "autoCopyCheckBox";
+            this.autoCopyCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.autoCopyCheckBox.Size = new System.Drawing.Size(74, 17);
+            this.autoCopyCheckBox.TabIndex = 15;
+            this.autoCopyCheckBox.Text = "Auto copy";
+            this.autoCopyCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.SystemColors.Control;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label8.Location = new System.Drawing.Point(119, 186);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(179, 13);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "Pastes are always marked as private";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.SystemColors.Control;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label9.Location = new System.Drawing.Point(119, 209);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(213, 13);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "Replace clipboard contents with paste URL";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.SystemColors.Control;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label10.Location = new System.Drawing.Point(119, 232);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(176, 13);
+            this.label10.TabIndex = 19;
+            this.label10.Text = "Open new pastes in default browser";
+            // 
+            // autoOpenCheckBox
+            // 
+            this.autoOpenCheckBox.AutoSize = true;
+            this.autoOpenCheckBox.Location = new System.Drawing.Point(38, 231);
+            this.autoOpenCheckBox.Name = "autoOpenCheckBox";
+            this.autoOpenCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.autoOpenCheckBox.Size = new System.Drawing.Size(75, 17);
+            this.autoOpenCheckBox.TabIndex = 18;
+            this.autoOpenCheckBox.Text = "Auto open";
+            this.autoOpenCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // nameBox
+            // 
+            this.nameBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::stikkPop.Properties.Settings.Default, "name", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nameBox.Location = new System.Drawing.Point(97, 75);
+            this.nameBox.Name = "nameBox";
+            this.nameBox.Size = new System.Drawing.Size(220, 20);
+            this.nameBox.TabIndex = 3;
+            this.nameBox.Text = global::stikkPop.Properties.Settings.Default.name;
+            // 
+            // endpointBox
+            // 
+            this.endpointBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::stikkPop.Properties.Settings.Default, "endpoint", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.endpointBox.Location = new System.Drawing.Point(97, 28);
+            this.endpointBox.Name = "endpointBox";
+            this.endpointBox.Size = new System.Drawing.Size(220, 20);
+            this.endpointBox.TabIndex = 0;
+            this.endpointBox.Text = global::stikkPop.Properties.Settings.Default.endpoint;
+            // 
             // Configure
             // 
             this.AcceptButton = this.SaveBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
-            this.ClientSize = new System.Drawing.Size(349, 271);
+            this.ClientSize = new System.Drawing.Size(349, 301);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.autoOpenCheckBox);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.autoCopyCheckBox);
             this.Controls.Add(this.cross);
             this.Controls.Add(this.tick);
             this.Controls.Add(this.privateCheckBox);
@@ -254,5 +322,10 @@
         private System.Windows.Forms.CheckBox privateCheckBox;
         private System.Windows.Forms.PictureBox tick;
         private System.Windows.Forms.PictureBox cross;
+        private System.Windows.Forms.CheckBox autoCopyCheckBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox autoOpenCheckBox;
     }
 }

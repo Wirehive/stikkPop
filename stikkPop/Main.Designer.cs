@@ -32,7 +32,7 @@
             this.configureLink = new System.Windows.Forms.LinkLabel();
             this.PasteClipboardButton = new System.Windows.Forms.Button();
             this.urlBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.PastedURLLabel = new System.Windows.Forms.Label();
             this.CopyLinkButton = new System.Windows.Forms.Button();
             this.syntaxBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -73,18 +73,19 @@
             this.urlBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.urlBox.Location = new System.Drawing.Point(13, 67);
             this.urlBox.Name = "urlBox";
+            this.urlBox.ReadOnly = true;
             this.urlBox.Size = new System.Drawing.Size(180, 20);
             this.urlBox.TabIndex = 2;
             // 
-            // label1
+            // PastedURLLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 48);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Pasted URL";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.PastedURLLabel.AutoSize = true;
+            this.PastedURLLabel.Location = new System.Drawing.Point(13, 48);
+            this.PastedURLLabel.Name = "PastedURLLabel";
+            this.PastedURLLabel.Size = new System.Drawing.Size(65, 13);
+            this.PastedURLLabel.TabIndex = 3;
+            this.PastedURLLabel.Text = "Pasted URL";
+            this.PastedURLLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // CopyLinkButton
             // 
@@ -193,7 +194,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.syntaxBox);
             this.Controls.Add(this.CopyLinkButton);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.PastedURLLabel);
             this.Controls.Add(this.urlBox);
             this.Controls.Add(this.PasteClipboardButton);
             this.Controls.Add(this.configureLink);
@@ -215,7 +216,7 @@
         private System.Windows.Forms.LinkLabel configureLink;
         private System.Windows.Forms.Button PasteClipboardButton;
         private System.Windows.Forms.TextBox urlBox;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label PastedURLLabel;
         private System.Windows.Forms.Button CopyLinkButton;
         private System.Windows.Forms.ComboBox syntaxBox;
         private System.Windows.Forms.Label label2;

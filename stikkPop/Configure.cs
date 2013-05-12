@@ -36,6 +36,8 @@ namespace stikkPop
             Settings.Default["syntax"] = syntaxBox.SelectedValue;
             Settings.Default["name"] = nameBox.Text;
             Settings.Default["alwaysPrivate"] = privateCheckBox.Checked;
+            Settings.Default["autoCopy"] = autoCopyCheckBox.Checked;
+            Settings.Default["autoOpen"] = autoOpenCheckBox.Checked;
             Settings.Default.Save();
             this.Close();
         }
@@ -43,11 +45,16 @@ namespace stikkPop
         System.Windows.Forms.Timer TestHTTP200Timer = new System.Windows.Forms.Timer();
         private void Configure_Load(object sender, EventArgs e)
         {
+            //Set initial dialog state
             syntaxBox.DataSource = Startup.syntaxList;
             syntaxBox.SelectedItem = Settings.Default["syntax"];
             endpointBox.Text = Settings.Default["endpoint"].ToString();
             nameBox.Text = Settings.Default["name"].ToString();
             privateCheckBox.Checked = (bool)Settings.Default["alwaysPrivate"];
+            autoCopyCheckBox.Checked = (bool)Settings.Default["autoCopy"];
+            autoOpenCheckBox.Checked = (bool)Settings.Default["autoOpen"];
+
+            //Validate endpoint URL and prepare to validate on typing
             TestHTTP200(endpointBox.Text);
             endpointBox.KeyUp += EndpointBox_KeyUp;
             TestHTTP200Timer.Tick += new EventHandler(TestHTTP200TimerEnd);
