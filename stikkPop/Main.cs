@@ -30,18 +30,23 @@ namespace stikkPop
             return returnText;
         }
 
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.V && e.Modifiers == Keys.Control)
-            {
-                MessageBox.Show("Hello world");
-            }
-            base.OnKeyDown(e);
-        }
-
         public Main()
         {
             InitializeComponent();
+            this.KeyDown += Main_KeyDown;
+            if (Settings.Default["EndPoint"].ToString() == string.Empty)
+            {
+                Configure configureDialog = new Configure();
+                configureDialog.ShowDialog();
+            }
+        }
+
+        void Main_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.V && e.Modifiers == Keys.Control)
+            {
+                PasteText();
+            }
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -50,69 +55,109 @@ namespace stikkPop
             configureDialog.ShowDialog();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
+            PasteText();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {            
-            pasteText = GetClipboardText();
-            pasteText = HttpUtility.UrlEncode(pasteText);
-            if (privateCheckBox.Checked == true)
+        private void PasteText()
+        {
+            List<string> errors = new List<string>();
+
+            if (ValidateInput(errors))
             {
-                isPrivate = "1";
-            }
-            string name = (string)Settings.Default["name"];
-            name = HttpUtility.UrlEncode(name);
-
-            HttpWebRequest request = WebRequest.Create(Settings.Default["EndPoint"].ToString()) as HttpWebRequest;
-            request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
-
-            ASCIIEncoding encoding = new ASCIIEncoding();
-            string postData = "";
-            postData += "text="+pasteText;
-            postData += "&lang=" + syntaxBox.SelectedValue;
-            postData += "&title=" + titleBox.Text;
-            postData += "&private=" + isPrivate;
-            postData += "&name=" + name;
-            postData += "&expire=" + expiryBox.ValueMember;
-
-            byte[] post = encoding.GetBytes(postData);
-            request.ContentLength = post.Length;
-
-            using (Stream output = request.GetRequestStream())
-            {
-                output.Write(post, 0, post.Length);
-            }
-
-
-            using (var response = (HttpWebResponse)request.GetResponse())
-            {
-                var responseValue = string.Empty;
-
-                if (response.StatusCode != HttpStatusCode.OK)
+                pasteText = GetClipboardText();
+                pasteText = HttpUtility.UrlEncode(pasteText);
+                if (privateCheckBox.Checked == true)
                 {
-                    var message = String.Format("Request failed. Received HTTP {0}", response.StatusCode);
-                    throw new ApplicationException(message);
+                    isPrivate = "1";
                 }
+                string name = (string)Settings.Default["name"];
+                name = HttpUtility.UrlEncode(name);
 
-                // grab the response
-                using (var responseStream = response.GetResponseStream())
+                try
                 {
-                    if (responseStream != null)
-                        using (var reader = new StreamReader(responseStream))
+                    HttpWebRequest request = WebRequest.Create(Settings.Default["EndPoint"].ToString()) as HttpWebRequest;
+                    request.Method = "POST";
+                    request.ContentType = "application/x-www-form-urlencoded";
+
+                    ASCIIEncoding encoding = new ASCIIEncoding();
+                    string postData = "";
+                    postData += "text=" + pasteText;
+                    postData += "&lang=" + syntaxBox.SelectedValue;
+                    postData += "&title=" + titleBox.Text;
+                    postData += "&private=" + isPrivate;
+                    postData += "&name=" + name;
+                    postData += "&expire=" + expiryBox.ValueMember;
+
+                    byte[] post = encoding.GetBytes(postData);
+                    request.ContentLength = post.Length;
+
+                    using (Stream output = request.GetRequestStream())
+                    {
+                        output.Write(post, 0, post.Length);
+                    }
+
+                    using (var response = (HttpWebResponse)request.GetResponse())
+                    {
+                        var responseValue = string.Empty;
+
+                        if (response.StatusCode != HttpStatusCode.OK)
                         {
-                            responseValue = reader.ReadToEnd();
+                            var message = String.Format("Request failed. Received HTTP {0}", response.StatusCode);
+                            throw new ApplicationException(message);
                         }
+
+                        // grab the response
+                        using (var responseStream = response.GetResponseStream())
+                        {
+                            if (responseStream != null)
+                                using (var reader = new StreamReader(responseStream))
+                                {
+                                    responseValue = reader.ReadToEnd();
+                                }
+                        }
+
+                        pasteURL = responseValue;
+                    }
+
+                    urlBox.Text = pasteURL;
+                }
+                catch 
+                {
+                    MessageBox.Show("API Unreachable:\n " + Settings.Default["EndPoint"].ToString());
                 }
 
-                pasteURL = responseValue;
+            }
+            else
+            {
+                StringBuilder sbErrors = new StringBuilder();
+
+                if (errors.Count > 0)
+                {
+                    //sbErrors.AppendLine("The following errors occured:");
+
+                    foreach (string error in errors)
+                    {
+                        sbErrors.AppendLine(error);
+                    }
+
+                    MessageBox.Show(sbErrors.ToString());
+                }
+            }
+        }
+
+        private bool ValidateInput(List<string> errors)
+        {
+            bool isValid = true;
+
+            if (Settings.Default["EndPoint"].ToString() == string.Empty)
+            {
+                isValid = false;
+                errors.Add("API Endpoint has not been set.");
             }
 
-            urlBox.Text = pasteURL;
-
+            return isValid;
         }
 
         private void CopyLinkButton_Click(object sender, EventArgs e)
@@ -129,8 +174,6 @@ namespace stikkPop
                 privateCheckBox.Enabled = false;
                 privateCheckBox.Checked = true;
             }
-
-            
 
             //Build a list
             var expiryTimes = new List<Expiry>();
