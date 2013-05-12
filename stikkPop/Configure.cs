@@ -36,6 +36,8 @@ namespace stikkPop
             Settings.Default["syntax"] = syntaxBox.SelectedValue;
             Settings.Default["name"] = nameBox.Text;
             Settings.Default["alwaysPrivate"] = privateCheckBox.Checked;
+            Settings.Default["autoCopy"] = autoCopyCheckBox.Checked;
+            Settings.Default["autoOpen"] = autoOpenCheckBox.Checked;
             Settings.Default.Save();
             this.Close();
         }
@@ -43,12 +45,14 @@ namespace stikkPop
         System.Windows.Forms.Timer TestHTTP200Timer = new System.Windows.Forms.Timer();
         private void Configure_Load(object sender, EventArgs e)
         {
+            //Set initial dialog state
             syntaxBox.DataSource = Startup.syntaxList;
             syntaxBox.SelectedItem = Settings.Default["syntax"];
-            endpointBox.Text = Settings.Default["endpoint"].ToString();
-            nameBox.Text = Settings.Default["name"].ToString();
-            privateCheckBox.Checked = (bool)Settings.Default["alwaysPrivate"];
-            TestHTTP200(endpointBox.Text);
+
+            //Validate endpoint URL 
+            TestHTTP200(endpointBox.Text + "/api/create");
+
+            //prepare to validate on typing
             endpointBox.KeyUp += EndpointBox_KeyUp;
             TestHTTP200Timer.Tick += new EventHandler(TestHTTP200TimerEnd);
             TestHTTP200Timer.Interval = 750; 
@@ -64,7 +68,7 @@ namespace stikkPop
         private void TestHTTP200TimerEnd(Object myObject, EventArgs myEventArgs)
         {
             TestHTTP200Timer.Stop();
-            TestHTTP200(endpointBox.Text);
+            TestHTTP200(endpointBox.Text+"/api/create");
         }
 
         private void privateCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -122,6 +126,11 @@ namespace stikkPop
                 tick.Visible = false;
                 cross.Visible = true;
             }
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
 
         }
     }

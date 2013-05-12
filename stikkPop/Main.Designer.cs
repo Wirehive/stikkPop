@@ -32,7 +32,7 @@
             this.configureLink = new System.Windows.Forms.LinkLabel();
             this.PasteClipboardButton = new System.Windows.Forms.Button();
             this.urlBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.PastedURLLabel = new System.Windows.Forms.Label();
             this.CopyLinkButton = new System.Windows.Forms.Button();
             this.syntaxBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -43,19 +43,21 @@
             this.expiryBox = new System.Windows.Forms.ComboBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.composeButton = new System.Windows.Forms.Button();
+            this.openStikkedLink = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // configureLink
             // 
             this.configureLink.AutoSize = true;
-            this.configureLink.Location = new System.Drawing.Point(173, 238);
+            this.configureLink.Location = new System.Drawing.Point(173, 272);
             this.configureLink.Name = "configureLink";
             this.configureLink.Size = new System.Drawing.Size(52, 13);
-            this.configureLink.TabIndex = 0;
+            this.configureLink.TabIndex = 9;
             this.configureLink.TabStop = true;
             this.configureLink.Text = "Configure";
-            this.configureLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.configureLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.configureLink_LinkClicked);
             // 
             // PasteClipboardButton
             // 
@@ -66,25 +68,26 @@
             this.PasteClipboardButton.TabIndex = 1;
             this.PasteClipboardButton.Text = "Paste Clipboard";
             this.PasteClipboardButton.UseVisualStyleBackColor = true;
-            this.PasteClipboardButton.Click += new System.EventHandler(this.button1_Click);
+            this.PasteClipboardButton.Click += new System.EventHandler(this.pasteButton_Click);
             // 
             // urlBox
             // 
             this.urlBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.urlBox.Location = new System.Drawing.Point(13, 67);
             this.urlBox.Name = "urlBox";
+            this.urlBox.ReadOnly = true;
             this.urlBox.Size = new System.Drawing.Size(180, 20);
             this.urlBox.TabIndex = 2;
             // 
-            // label1
+            // PastedURLLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 48);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Pasted URL";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.PastedURLLabel.AutoSize = true;
+            this.PastedURLLabel.Location = new System.Drawing.Point(13, 48);
+            this.PastedURLLabel.Name = "PastedURLLabel";
+            this.PastedURLLabel.Size = new System.Drawing.Size(65, 13);
+            this.PastedURLLabel.TabIndex = 3;
+            this.PastedURLLabel.Text = "Pasted URL";
+            this.PastedURLLabel.Click += new System.EventHandler(this.urlLabel_Click);
             // 
             // CopyLinkButton
             // 
@@ -93,7 +96,7 @@
             this.CopyLinkButton.Location = new System.Drawing.Point(200, 65);
             this.CopyLinkButton.Name = "CopyLinkButton";
             this.CopyLinkButton.Size = new System.Drawing.Size(25, 23);
-            this.CopyLinkButton.TabIndex = 4;
+            this.CopyLinkButton.TabIndex = 3;
             this.CopyLinkButton.UseVisualStyleBackColor = true;
             this.CopyLinkButton.Click += new System.EventHandler(this.CopyLinkButton_Click);
             // 
@@ -104,7 +107,6 @@
             this.syntaxBox.Name = "syntaxBox";
             this.syntaxBox.Size = new System.Drawing.Size(212, 21);
             this.syntaxBox.TabIndex = 5;
-            this.syntaxBox.SelectedIndexChanged += new System.EventHandler(this.syntaxBox_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -118,7 +120,7 @@
             // privateCheckBox
             // 
             this.privateCheckBox.AutoSize = true;
-            this.privateCheckBox.Location = new System.Drawing.Point(16, 234);
+            this.privateCheckBox.Location = new System.Drawing.Point(166, 206);
             this.privateCheckBox.Name = "privateCheckBox";
             this.privateCheckBox.Size = new System.Drawing.Size(59, 17);
             this.privateCheckBox.TabIndex = 7;
@@ -130,7 +132,7 @@
             this.titleBox.Location = new System.Drawing.Point(13, 117);
             this.titleBox.Name = "titleBox";
             this.titleBox.Size = new System.Drawing.Size(212, 20);
-            this.titleBox.TabIndex = 8;
+            this.titleBox.TabIndex = 4;
             // 
             // label3
             // 
@@ -146,19 +148,18 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(14, 206);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 13);
+            this.label4.Size = new System.Drawing.Size(35, 13);
             this.label4.TabIndex = 11;
-            this.label4.Text = "Expiry (Mins)";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.label4.Text = "Expiry";
             // 
             // expiryBox
             // 
             this.expiryBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.expiryBox.FormattingEnabled = true;
-            this.expiryBox.Location = new System.Drawing.Point(86, 203);
+            this.expiryBox.Location = new System.Drawing.Point(53, 203);
             this.expiryBox.Name = "expiryBox";
-            this.expiryBox.Size = new System.Drawing.Size(139, 21);
-            this.expiryBox.TabIndex = 12;
+            this.expiryBox.Size = new System.Drawing.Size(105, 21);
+            this.expiryBox.TabIndex = 6;
             // 
             // pictureBox1
             // 
@@ -178,12 +179,36 @@
             this.label5.TabIndex = 14;
             this.label5.Text = "or Ctrl-v";
             // 
+            // composeButton
+            // 
+            this.composeButton.Location = new System.Drawing.Point(13, 239);
+            this.composeButton.Name = "composeButton";
+            this.composeButton.Size = new System.Drawing.Size(212, 25);
+            this.composeButton.TabIndex = 8;
+            this.composeButton.Text = "Compose Paste";
+            this.composeButton.UseVisualStyleBackColor = true;
+            this.composeButton.Click += new System.EventHandler(this.composeButton_Click);
+            // 
+            // openStikkedLink
+            // 
+            this.openStikkedLink.AutoSize = true;
+            this.openStikkedLink.Location = new System.Drawing.Point(13, 273);
+            this.openStikkedLink.Name = "openStikkedLink";
+            this.openStikkedLink.Size = new System.Drawing.Size(72, 13);
+            this.openStikkedLink.TabIndex = 15;
+            this.openStikkedLink.TabStop = true;
+            this.openStikkedLink.Text = "Open Stikked";
+            this.openStikkedLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.openStikkedLink_LinkClicked);
+            // 
             // Main
             // 
             this.AcceptButton = this.PasteClipboardButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(239, 265);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(239, 301);
+            this.Controls.Add(this.openStikkedLink);
+            this.Controls.Add(this.composeButton);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.expiryBox);
             this.Controls.Add(this.label4);
@@ -193,7 +218,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.syntaxBox);
             this.Controls.Add(this.CopyLinkButton);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.PastedURLLabel);
             this.Controls.Add(this.urlBox);
             this.Controls.Add(this.PasteClipboardButton);
             this.Controls.Add(this.configureLink);
@@ -215,7 +240,7 @@
         private System.Windows.Forms.LinkLabel configureLink;
         private System.Windows.Forms.Button PasteClipboardButton;
         private System.Windows.Forms.TextBox urlBox;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label PastedURLLabel;
         private System.Windows.Forms.Button CopyLinkButton;
         private System.Windows.Forms.ComboBox syntaxBox;
         private System.Windows.Forms.Label label2;
@@ -226,6 +251,8 @@
         private System.Windows.Forms.ComboBox expiryBox;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button composeButton;
+        private System.Windows.Forms.LinkLabel openStikkedLink;
     }
 }
 

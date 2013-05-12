@@ -33,99 +33,63 @@ namespace stikkPop
         public Main()
         {
             InitializeComponent();
+            Configure configureDialog = new Configure();
             this.KeyDown += Main_KeyDown;
+
+            //Is initial config needed?
             if (Settings.Default["EndPoint"].ToString() == string.Empty)
             {
-                Configure configureDialog = new Configure();
                 configureDialog.ShowDialog();
             }
+
+            syntaxBox.SelectedItem = Settings.Default["syntax"];
         }
 
         void Main_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.V && e.Modifiers == Keys.Control)
             {
-                PasteText();
+                string pasteText = GetClipboardText();
+                PasteText(pasteText);
             }
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void configureLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Configure configureDialog = new Configure();
             configureDialog.ShowDialog();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void pasteButton_Click(object sender, EventArgs e)
         {
-            PasteText();
+            string pasteText = GetClipboardText();
+            PasteText(pasteText);
         }
 
-        private void PasteText()
+        public void PasteText(string pasteText)
         {
             List<string> errors = new List<string>();
 
+            string endpointURL = Settings.Default["EndPoint"].ToString() + "/api/create";
+
             if (ValidateInput(errors))
             {
-                pasteText = GetClipboardText();
                 pasteText = HttpUtility.UrlEncode(pasteText);
                 if (privateCheckBox.Checked == true)
                 {
                     isPrivate = "1";
                 }
+
                 string name = (string)Settings.Default["name"];
                 name = HttpUtility.UrlEncode(name);
 
                 try
                 {
-                    HttpWebRequest request = WebRequest.Create(Settings.Default["EndPoint"].ToString()) as HttpWebRequest;
-                    request.Method = "POST";
-                    request.ContentType = "application/x-www-form-urlencoded";
-
-                    ASCIIEncoding encoding = new ASCIIEncoding();
-                    string postData = "";
-                    postData += "text=" + pasteText;
-                    postData += "&lang=" + syntaxBox.SelectedValue;
-                    postData += "&title=" + titleBox.Text;
-                    postData += "&private=" + isPrivate;
-                    postData += "&name=" + name;
-                    postData += "&expire=" + expiryBox.ValueMember;
-
-                    byte[] post = encoding.GetBytes(postData);
-                    request.ContentLength = post.Length;
-
-                    using (Stream output = request.GetRequestStream())
-                    {
-                        output.Write(post, 0, post.Length);
-                    }
-
-                    using (var response = (HttpWebResponse)request.GetResponse())
-                    {
-                        var responseValue = string.Empty;
-
-                        if (response.StatusCode != HttpStatusCode.OK)
-                        {
-                            var message = String.Format("Request failed. Received HTTP {0}", response.StatusCode);
-                            throw new ApplicationException(message);
-                        }
-
-                        // grab the response
-                        using (var responseStream = response.GetResponseStream())
-                        {
-                            if (responseStream != null)
-                                using (var reader = new StreamReader(responseStream))
-                                {
-                                    responseValue = reader.ReadToEnd();
-                                }
-                        }
-
-                        pasteURL = responseValue;
-                    }
-
-                    urlBox.Text = pasteURL;
+                    PostData(pasteText, name, endpointURL);
                 }
                 catch 
                 {
-                    MessageBox.Show("API Unreachable:\n " + Settings.Default["EndPoint"].ToString());
+                    MessageBox.Show("API Unreachable:\n " + endpointURL);
                 }
 
             }
@@ -135,8 +99,6 @@ namespace stikkPop
 
                 if (errors.Count > 0)
                 {
-                    //sbErrors.AppendLine("The following errors occured:");
-
                     foreach (string error in errors)
                     {
                         sbErrors.AppendLine(error);
@@ -147,7 +109,71 @@ namespace stikkPop
             }
         }
 
-        private bool ValidateInput(List<string> errors)
+        private void PostData(string pasteText, string name, string url)
+        {
+            HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+
+            ASCIIEncoding encoding = new ASCIIEncoding();
+            string postData = "";
+            postData += "text=" + pasteText;
+            postData += "&lang=" + syntaxBox.SelectedValue;
+            postData += "&title=" + titleBox.Text;
+            postData += "&private=" + isPrivate;
+            postData += "&name=" + name;
+            postData += "&expire=" + expiryBox.ValueMember;
+
+            byte[] post = encoding.GetBytes(postData);
+            request.ContentLength = post.Length;
+
+            using (Stream output = request.GetRequestStream())
+            {
+                output.Write(post, 0, post.Length);
+            }
+
+            using (var response = (HttpWebResponse)request.GetResponse())
+            {
+                var responseValue = string.Empty;
+
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    var message = String.Format("Request failed. Received HTTP {0}", response.StatusCode);
+                    throw new ApplicationException(message);
+                }
+
+                // grab the response
+                using (var responseStream = response.GetResponseStream())
+                {
+                    if (responseStream != null)
+                        using (var reader = new StreamReader(responseStream))
+                        {
+                            responseValue = reader.ReadToEnd();
+                        }
+                }
+
+                pasteURL = responseValue;
+            }
+
+            urlBox.Text = pasteURL;
+
+            if ((bool)Settings.Default["autoCopy"] == true)
+            {
+                Clipboard.SetText(urlBox.Text);
+                PastedURLLabel.Text = "Pasted URL (Auto-copied)";
+            }
+            else
+            {
+                PastedURLLabel.Text = "Pasted URL";
+            }
+
+            if ((bool)Settings.Default["autoOpen"] == true)
+            {
+                System.Diagnostics.Process.Start(urlBox.Text);
+            }
+        }
+
+        private static bool ValidateInput(List<string> errors)
         {
             bool isValid = true;
 
@@ -162,7 +188,11 @@ namespace stikkPop
 
         private void CopyLinkButton_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(urlBox.Text);
+            try
+            {
+                Clipboard.SetText(urlBox.Text);
+            }
+            catch { }
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -193,27 +223,15 @@ namespace stikkPop
             this.expiryBox.ValueMember = "Value";
 
             this.syntaxBox.KeyUp += new KeyEventHandler(this.syntaxBox_KeyUp);
-
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void urlLabel_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void expiryBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start(urlBox.Text);
-        }
-
-        private void syntaxBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            try
+            {
+                System.Diagnostics.Process.Start(urlBox.Text);
+            }
+            catch { }
         }
 
         private void syntaxBox_KeyUp(object sender, KeyEventArgs e)
@@ -258,9 +276,15 @@ namespace stikkPop
             }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void composeButton_Click(object sender, EventArgs e)
         {
+            Composer composerDialog = new Composer(this);
+            composerDialog.Show();
+        }
 
+        private void openStikkedLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(Settings.Default["EndPoint"].ToString());
         }
     }
     public class Expiry
