@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="stikkPop.exe" size="99328">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="stikkPop.exe" size="99840">
       <assemblyIdentity name="stikkPop" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>dj8fAbRI9Qw3TmGxF5EHesX9vbdyYFE1ExZ2qddtm9o=</dsig:DigestValue>
+        <dsig:DigestValue>EFayc/GLUkqQm/uLZP3gC9WvSe3mZsgJGIg8M9IxPSs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

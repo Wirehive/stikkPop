@@ -75,7 +75,6 @@
             this.urlBox.Name = "urlBox";
             this.urlBox.Size = new System.Drawing.Size(180, 20);
             this.urlBox.TabIndex = 2;
-            this.urlBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
@@ -200,6 +199,7 @@
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "Main";
             this.Text = "stikkPop";

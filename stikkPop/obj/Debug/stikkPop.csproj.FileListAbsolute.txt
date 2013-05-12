@@ -20,3 +20,4 @@ C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\bin\Debug\stikkPop.exe.m
 C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\bin\Debug\stikkPop.application
 C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Debug\stikkPop.exe.manifest
 C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Debug\stikkPop.application
+C:\Users\Simon Green\Documents\GitHub\stikkPop\stikkPop\obj\Debug\stikkPop.csprojResolveAssemblyReference.cache
