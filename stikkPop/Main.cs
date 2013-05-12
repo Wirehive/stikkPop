@@ -30,6 +30,15 @@ namespace stikkPop
             return returnText;
         }
 
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.V && e.Modifiers == Keys.Control)
+            {
+                MessageBox.Show("Hello world");
+            }
+            base.OnKeyDown(e);
+        }
+
         public Main()
         {
             InitializeComponent();
@@ -204,6 +213,11 @@ namespace stikkPop
                 this.syntaxBox.SelectionStart = actual.Length;
                 this.syntaxBox.SelectionLength = found.Length;
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
     public class Expiry
