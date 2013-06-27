@@ -11,6 +11,8 @@ using System.Net;
 using System.IO;
 using System.Web;
 using stikkPop.Properties;
+using System.Collections.Specialized;
+using Newtonsoft.Json.Linq;
 
 namespace stikkPop
 {
@@ -98,21 +100,24 @@ namespace stikkPop
         {
             string imagePath = Path.GetTempFileName();
             pasteImage.Save(imagePath, pasteImage.RawFormat);
-            //MemoryStream image = new MemoryStream();
-            //pasteImage.Save(image, pasteImage.RawFormat);
-
-            //image.Position=0;
-            //byte[] byteImage = image.ToArray();
 
             string endpointURL = "https://api.imgur.com/3/image";
 
             WebClient client = new WebClient();
-            client.Headers.Add("Authorization: Client-ID 6a67b5ef855d926");
-            byte[] responseArray = client.UploadFile(endpointURL, imagePath);
+            client.Headers.Add("Authorization", "Client-ID 6a67b5ef855d926");
 
+            var values = new NameValueCollection
+            {
+                {"image", Convert.ToBase64String(File.ReadAllBytes(imagePath))}
+            };
 
-            Console.WriteLine("\nResponse received was :{0}", Encoding.ASCII.GetString(responseArray));
+            byte[] responseArray = client.UploadValues(endpointURL, values);
 
+            string json = Encoding.ASCII.GetString(responseArray);
+            JObject o = JObject.Parse(json);
+            pasteURL = o["data"]["link"].ToString();
+
+            handleUrl();
         }
 
         public void PasteText(string pasteText)
@@ -204,6 +209,11 @@ namespace stikkPop
                 pasteURL = responseValue;
             }
 
+            handleUrl();
+        }
+
+        private void handleUrl()
+        {
             urlBox.Text = pasteURL;
 
             if ((bool)Settings.Default["autoCopy"] == true)
