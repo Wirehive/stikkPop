@@ -96,16 +96,20 @@ namespace stikkPop
 
         public void PasteImage(Image pasteImage)
         {
-            MemoryStream image = new MemoryStream();
-            pasteImage.Save(image, pasteImage.RawFormat);
-            image.Position=0;
-            byte[] byteImage = image.ToArray();
+            string imagePath = Path.GetTempFileName();
+            pasteImage.Save(imagePath, pasteImage.RawFormat);
+            //MemoryStream image = new MemoryStream();
+            //pasteImage.Save(image, pasteImage.RawFormat);
+
+            //image.Position=0;
+            //byte[] byteImage = image.ToArray();
 
             string endpointURL = "https://api.imgur.com/3/image";
 
             WebClient client = new WebClient();
             client.Headers.Add("Authorization: Client-ID 6a67b5ef855d926");
-            byte[] responseArray = client.UploadData(endpointURL, byteImage);
+            byte[] responseArray = client.UploadFile(endpointURL, imagePath);
+
 
             Console.WriteLine("\nResponse received was :{0}", Encoding.ASCII.GetString(responseArray));
 
