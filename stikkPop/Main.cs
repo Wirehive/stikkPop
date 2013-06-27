@@ -11,6 +11,8 @@ using System.Net;
 using System.IO;
 using System.Web;
 using stikkPop.Properties;
+using System.Collections.Specialized;
+using Newtonsoft.Json.Linq;
 
 namespace stikkPop
 {
@@ -28,6 +30,16 @@ namespace stikkPop
                 returnText = Clipboard.GetText(TextDataFormat.Text);
             }
             return returnText;
+        }
+
+        public Image GetClipboardImage()
+        {
+            System.Drawing.Image returnImage = null;
+            if (Clipboard.ContainsImage())
+            {
+                returnImage = Clipboard.GetImage();
+            }
+            return returnImage;
         }
 
         public Main()
@@ -49,8 +61,17 @@ namespace stikkPop
         {
             if (e.KeyCode == Keys.V && e.Modifiers == Keys.Control)
             {
-                string pasteText = GetClipboardText();
-                PasteText(pasteText);
+                if (Clipboard.ContainsText())
+                {
+                    string pasteText = GetClipboardText();
+                    PasteText(pasteText);
+                }
+
+                if (Clipboard.ContainsImage())
+                {
+                    Image pastImage = GetClipboardImage();
+                    PasteImage(pastImage);
+                }
             }
         }
 
@@ -62,8 +83,41 @@ namespace stikkPop
 
         private void pasteButton_Click(object sender, EventArgs e)
         {
-            string pasteText = GetClipboardText();
-            PasteText(pasteText);
+            if (Clipboard.ContainsText())
+            {
+                string pasteText = GetClipboardText();
+                PasteText(pasteText);
+            }
+
+            if (Clipboard.ContainsImage())
+            {
+                Image pasteImage = GetClipboardImage();
+                PasteImage(pasteImage);
+            }
+        }
+
+        public void PasteImage(Image pasteImage)
+        {
+            string imagePath = Path.GetTempFileName();
+            pasteImage.Save(imagePath, pasteImage.RawFormat);
+
+            string endpointURL = "https://api.imgur.com/3/image";
+
+            WebClient client = new WebClient();
+            client.Headers.Add("Authorization", "Client-ID 6a67b5ef855d926");
+
+            var values = new NameValueCollection
+            {
+                {"image", Convert.ToBase64String(File.ReadAllBytes(imagePath))}
+            };
+
+            byte[] responseArray = client.UploadValues(endpointURL, values);
+
+            string json = Encoding.ASCII.GetString(responseArray);
+            JObject o = JObject.Parse(json);
+            pasteURL = o["data"]["link"].ToString();
+
+            handleUrl();
         }
 
         public void PasteText(string pasteText)
@@ -85,7 +139,7 @@ namespace stikkPop
 
                 try
                 {
-                    PostData(pasteText, name, endpointURL);
+                    PostText(pasteText, name, endpointURL);
                 }
                 catch 
                 {
@@ -109,7 +163,7 @@ namespace stikkPop
             }
         }
 
-        private void PostData(string pasteText, string name, string url)
+        private void PostText(string pasteText, string name, string url)
         {
             HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
             request.Method = "POST";
@@ -155,6 +209,11 @@ namespace stikkPop
                 pasteURL = responseValue;
             }
 
+            handleUrl();
+        }
+
+        private void handleUrl()
+        {
             urlBox.Text = pasteURL;
 
             if ((bool)Settings.Default["autoCopy"] == true)

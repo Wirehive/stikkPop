@@ -63,6 +63,7 @@
             // 
             // invertCheckBox
             // 
+            this.invertCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.invertCheckBox.AutoSize = true;
             this.invertCheckBox.Checked = global::stikkPop.Properties.Settings.Default.invertColours;
             this.invertCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::stikkPop.Properties.Settings.Default, "invertColours", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
