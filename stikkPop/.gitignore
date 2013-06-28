@@ -50,9 +50,6 @@ _ReSharper*/
 # Office Temp Files
 ~$*
 
-#NuGet
-packages/
-
 #ncrunch
 *ncrunch*
 *crunch*.local.xml
