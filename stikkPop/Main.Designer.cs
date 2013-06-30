@@ -45,13 +45,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.composeButton = new System.Windows.Forms.Button();
             this.openStikkedLink = new System.Windows.Forms.LinkLabel();
+            this.screenshotButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // configureLink
             // 
             this.configureLink.AutoSize = true;
-            this.configureLink.Location = new System.Drawing.Point(173, 272);
+            this.configureLink.Location = new System.Drawing.Point(173, 307);
             this.configureLink.Name = "configureLink";
             this.configureLink.Size = new System.Drawing.Size(52, 13);
             this.configureLink.TabIndex = 9;
@@ -192,7 +193,7 @@
             // openStikkedLink
             // 
             this.openStikkedLink.AutoSize = true;
-            this.openStikkedLink.Location = new System.Drawing.Point(13, 273);
+            this.openStikkedLink.Location = new System.Drawing.Point(13, 308);
             this.openStikkedLink.Name = "openStikkedLink";
             this.openStikkedLink.Size = new System.Drawing.Size(72, 13);
             this.openStikkedLink.TabIndex = 15;
@@ -200,13 +201,24 @@
             this.openStikkedLink.Text = "Open Stikked";
             this.openStikkedLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.openStikkedLink_LinkClicked);
             // 
+            // screenshotButton
+            // 
+            this.screenshotButton.Location = new System.Drawing.Point(13, 270);
+            this.screenshotButton.Name = "screenshotButton";
+            this.screenshotButton.Size = new System.Drawing.Size(212, 25);
+            this.screenshotButton.TabIndex = 16;
+            this.screenshotButton.Text = "Capture Screenshot";
+            this.screenshotButton.UseVisualStyleBackColor = true;
+            this.screenshotButton.Click += new System.EventHandler(this.screenshotButton_Click);
+            // 
             // Main
             // 
             this.AcceptButton = this.PasteClipboardButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(239, 301);
+            this.ClientSize = new System.Drawing.Size(239, 329);
+            this.Controls.Add(this.screenshotButton);
             this.Controls.Add(this.openStikkedLink);
             this.Controls.Add(this.composeButton);
             this.Controls.Add(this.label5);
@@ -253,6 +265,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button composeButton;
         private System.Windows.Forms.LinkLabel openStikkedLink;
+        private System.Windows.Forms.Button screenshotButton;
     }
 }
 
