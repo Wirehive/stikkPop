@@ -39,19 +39,24 @@
             this.label6 = new System.Windows.Forms.Label();
             this.syntaxBox = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.privateCheckBox = new System.Windows.Forms.CheckBox();
             this.tick = new System.Windows.Forms.PictureBox();
             this.cross = new System.Windows.Forms.PictureBox();
-            this.autoCopyCheckBox = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.autoOpenCheckBox = new System.Windows.Forms.CheckBox();
-            this.nameBox = new System.Windows.Forms.TextBox();
-            this.endpointBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.validateButton = new System.Windows.Forms.Button();
+            this.PINbox = new System.Windows.Forms.TextBox();
+            this.labelYourPin = new System.Windows.Forms.Label();
+            this.loginLink = new System.Windows.Forms.LinkLabel();
+            this.autoOpenCheckBox = new System.Windows.Forms.CheckBox();
+            this.autoCopyCheckBox = new System.Windows.Forms.CheckBox();
+            this.privateCheckBox = new System.Windows.Forms.CheckBox();
+            this.nameBox = new System.Windows.Forms.TextBox();
+            this.endpointBox = new System.Windows.Forms.TextBox();
+            this.autheticatedLabel = new System.Windows.Forms.Label();
+            this.logOutButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tick)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cross)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -65,7 +70,6 @@
             this.label1.Size = new System.Drawing.Size(87, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Stikked Location";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -75,7 +79,6 @@
             this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Your Name";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -163,20 +166,6 @@
             this.label7.TabIndex = 11;
             this.label7.Text = "Syntax highlighting used by pastebin";
             // 
-            // privateCheckBox
-            // 
-            this.privateCheckBox.AutoSize = true;
-            this.privateCheckBox.Checked = global::stikkPop.Properties.Settings.Default.alwaysPrivate;
-            this.privateCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::stikkPop.Properties.Settings.Default, "alwaysPrivate", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.privateCheckBox.Location = new System.Drawing.Point(28, 188);
-            this.privateCheckBox.Name = "privateCheckBox";
-            this.privateCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.privateCheckBox.Size = new System.Drawing.Size(95, 17);
-            this.privateCheckBox.TabIndex = 4;
-            this.privateCheckBox.Text = "Always Private";
-            this.privateCheckBox.UseVisualStyleBackColor = true;
-            this.privateCheckBox.CheckedChanged += new System.EventHandler(this.privateCheckBox_CheckedChanged);
-            // 
             // tick
             // 
             this.tick.Image = ((System.Drawing.Image)(resources.GetObject("tick.Image")));
@@ -197,19 +186,6 @@
             this.cross.TabIndex = 14;
             this.cross.TabStop = false;
             this.cross.Visible = false;
-            // 
-            // autoCopyCheckBox
-            // 
-            this.autoCopyCheckBox.AutoSize = true;
-            this.autoCopyCheckBox.Checked = global::stikkPop.Properties.Settings.Default.autoCopy;
-            this.autoCopyCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::stikkPop.Properties.Settings.Default, "autoCopy", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.autoCopyCheckBox.Location = new System.Drawing.Point(235, 222);
-            this.autoCopyCheckBox.Name = "autoCopyCheckBox";
-            this.autoCopyCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.autoCopyCheckBox.Size = new System.Drawing.Size(74, 17);
-            this.autoCopyCheckBox.TabIndex = 5;
-            this.autoCopyCheckBox.Text = "Auto copy";
-            this.autoCopyCheckBox.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
@@ -247,6 +223,67 @@
             this.label10.TabIndex = 19;
             this.label10.Text = "Open new pastes in default browser";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(350, 202);
+            this.groupBox1.TabIndex = 21;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Text";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.logOutButton);
+            this.groupBox2.Controls.Add(this.autheticatedLabel);
+            this.groupBox2.Controls.Add(this.validateButton);
+            this.groupBox2.Controls.Add(this.PINbox);
+            this.groupBox2.Controls.Add(this.labelYourPin);
+            this.groupBox2.Controls.Add(this.loginLink);
+            this.groupBox2.Location = new System.Drawing.Point(379, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(350, 202);
+            this.groupBox2.TabIndex = 22;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Images";
+            // 
+            // validateButton
+            // 
+            this.validateButton.Location = new System.Drawing.Point(134, 97);
+            this.validateButton.Name = "validateButton";
+            this.validateButton.Size = new System.Drawing.Size(75, 23);
+            this.validateButton.TabIndex = 23;
+            this.validateButton.Text = "Validate";
+            this.validateButton.UseVisualStyleBackColor = true;
+            this.validateButton.Click += new System.EventHandler(this.validateImgurPIN);
+            // 
+            // PINbox
+            // 
+            this.PINbox.Location = new System.Drawing.Point(73, 66);
+            this.PINbox.Name = "PINbox";
+            this.PINbox.Size = new System.Drawing.Size(220, 20);
+            this.PINbox.TabIndex = 23;
+            // 
+            // labelYourPin
+            // 
+            this.labelYourPin.AutoSize = true;
+            this.labelYourPin.Location = new System.Drawing.Point(18, 69);
+            this.labelYourPin.Name = "labelYourPin";
+            this.labelYourPin.Size = new System.Drawing.Size(50, 13);
+            this.labelYourPin.TabIndex = 24;
+            this.labelYourPin.Text = "Your PIN";
+            // 
+            // loginLink
+            // 
+            this.loginLink.AutoSize = true;
+            this.loginLink.Location = new System.Drawing.Point(99, 42);
+            this.loginLink.Name = "loginLink";
+            this.loginLink.Size = new System.Drawing.Size(148, 13);
+            this.loginLink.TabIndex = 0;
+            this.loginLink.TabStop = true;
+            this.loginLink.Text = "Login to Imgur to get your PIN";
+            this.loginLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // autoOpenCheckBox
             // 
             this.autoOpenCheckBox.AutoSize = true;
@@ -259,6 +296,33 @@
             this.autoOpenCheckBox.TabIndex = 6;
             this.autoOpenCheckBox.Text = "Auto open";
             this.autoOpenCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // autoCopyCheckBox
+            // 
+            this.autoCopyCheckBox.AutoSize = true;
+            this.autoCopyCheckBox.Checked = global::stikkPop.Properties.Settings.Default.autoCopy;
+            this.autoCopyCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::stikkPop.Properties.Settings.Default, "autoCopy", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.autoCopyCheckBox.Location = new System.Drawing.Point(235, 222);
+            this.autoCopyCheckBox.Name = "autoCopyCheckBox";
+            this.autoCopyCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.autoCopyCheckBox.Size = new System.Drawing.Size(74, 17);
+            this.autoCopyCheckBox.TabIndex = 5;
+            this.autoCopyCheckBox.Text = "Auto copy";
+            this.autoCopyCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // privateCheckBox
+            // 
+            this.privateCheckBox.AutoSize = true;
+            this.privateCheckBox.Checked = global::stikkPop.Properties.Settings.Default.alwaysPrivate;
+            this.privateCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::stikkPop.Properties.Settings.Default, "alwaysPrivate", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.privateCheckBox.Location = new System.Drawing.Point(28, 188);
+            this.privateCheckBox.Name = "privateCheckBox";
+            this.privateCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.privateCheckBox.Size = new System.Drawing.Size(95, 17);
+            this.privateCheckBox.TabIndex = 4;
+            this.privateCheckBox.Text = "Always Private";
+            this.privateCheckBox.UseVisualStyleBackColor = true;
+            this.privateCheckBox.CheckedChanged += new System.EventHandler(this.privateCheckBox_CheckedChanged);
             // 
             // nameBox
             // 
@@ -278,33 +342,26 @@
             this.endpointBox.TabIndex = 1;
             this.endpointBox.Text = global::stikkPop.Properties.Settings.Default.endpoint;
             // 
-            // groupBox1
+            // autheticatedLabel
             // 
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(350, 202);
-            this.groupBox1.TabIndex = 21;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Text";
+            this.autheticatedLabel.AutoSize = true;
+            this.autheticatedLabel.Location = new System.Drawing.Point(117, 42);
+            this.autheticatedLabel.Name = "autheticatedLabel";
+            this.autheticatedLabel.Size = new System.Drawing.Size(114, 13);
+            this.autheticatedLabel.TabIndex = 25;
+            this.autheticatedLabel.Text = "Authenticated to Imgur";
+            this.autheticatedLabel.Visible = false;
             // 
-            // groupBox2
+            // logOutButton
             // 
-            this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Location = new System.Drawing.Point(379, 12);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(350, 202);
-            this.groupBox2.TabIndex = 22;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Images";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(44, 89);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(272, 13);
-            this.label11.TabIndex = 0;
-            this.label11.Text = "Currently all image pastes are sent to Imgur anonymously";
+            this.logOutButton.Location = new System.Drawing.Point(134, 97);
+            this.logOutButton.Name = "logOutButton";
+            this.logOutButton.Size = new System.Drawing.Size(75, 23);
+            this.logOutButton.TabIndex = 26;
+            this.logOutButton.Text = "Log Out";
+            this.logOutButton.UseVisualStyleBackColor = true;
+            this.logOutButton.Visible = false;
+            this.logOutButton.Click += new System.EventHandler(this.logOutButton_Click);
             // 
             // Configure
             // 
@@ -372,6 +429,11 @@
         private System.Windows.Forms.CheckBox autoOpenCheckBox;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.LinkLabel loginLink;
+        private System.Windows.Forms.TextBox PINbox;
+        private System.Windows.Forms.Label labelYourPin;
+        private System.Windows.Forms.Button validateButton;
+        private System.Windows.Forms.Label autheticatedLabel;
+        private System.Windows.Forms.Button logOutButton;
     }
 }
