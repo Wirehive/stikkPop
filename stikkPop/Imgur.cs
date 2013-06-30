@@ -43,12 +43,20 @@ namespace stikkPop
                 {"image", Convert.ToBase64String(File.ReadAllBytes(imagePath))}
             };
 
-            byte[] responseArray = client.UploadValues(imageEndpoint, values);
+            try
+            {
+                byte[] responseArray = client.UploadValues(imageEndpoint, values);
+                string json = Encoding.ASCII.GetString(responseArray);
+                JObject o = JObject.Parse(json);
+                string pasteURL = o["data"]["link"].ToString();
+                return pasteURL;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error communicating with Imgur");
+                return "";
+            }
 
-            string json = Encoding.ASCII.GetString(responseArray);
-            JObject o = JObject.Parse(json);
-            string pasteURL = o["data"]["link"].ToString();
-            return pasteURL;
         }
 
         public static void RequestPin()
@@ -100,7 +108,7 @@ namespace stikkPop
             using (WebClient Client = new WebClient())
             {
                 string access_token = String.Empty;
-                string refresh_token = String.Empty;
+                string refresh_token = Settings.Default["imgurRefreshToken"].ToString();
                 string expires_in = String.Empty;
 
                 try
@@ -113,11 +121,12 @@ namespace stikkPop
                     });
 
                     parseAuthResponse(ref access_token, ref refresh_token, ref expires_in, ApiResponse);
+
+                    Settings.Default["imgurAccessToken"] = access_token;
+                    Settings.Default["imgurRefreshToken"] = refresh_token;
+                    Settings.Default["imgurTokenExpires"] = DateTime.Now.AddSeconds(Convert.ToDouble(expires_in) - 120);
                 }
                 catch (WebException) { }
-
-                Settings.Default["imgurAccessToken"] = access_token;
-                Settings.Default["imgurRefreshToken"] = refresh_token;
             }
         }
 

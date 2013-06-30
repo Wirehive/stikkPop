@@ -1,6 +1,6 @@
 ﻿namespace stikkPop
 {
-    partial class RubberBand
+    partial class History
     {
         /// <summary>
         /// Required designer variable.
@@ -28,25 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.historyListBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
-            // RubberBand
+            // historyListBox
+            // 
+            this.historyListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.historyListBox.FormattingEnabled = true;
+            this.historyListBox.Location = new System.Drawing.Point(12, 12);
+            this.historyListBox.Name = "historyListBox";
+            this.historyListBox.Size = new System.Drawing.Size(260, 355);
+            this.historyListBox.TabIndex = 0;
+            // 
+            // History
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(284, 262);
-            this.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "RubberBand";
-            this.ShowInTaskbar = false;
-            this.Text = "RubberBand";
-            this.TransparencyKey = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(284, 393);
+            this.Controls.Add(this.historyListBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Name = "History";
+            this.Text = "History";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+        private System.Windows.Forms.ListBox historyListBox;
     }
 }
