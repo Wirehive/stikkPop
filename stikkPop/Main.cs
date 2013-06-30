@@ -19,8 +19,9 @@ namespace stikkPop
     public partial class Main : Form
     {
         string pasteURL;
-        string pasteText;
         string isPrivate = "0";
+
+        Bitmap bitmap = null;
 
         public string GetClipboardText()
         {
@@ -69,8 +70,8 @@ namespace stikkPop
 
                 if (Clipboard.ContainsImage())
                 {
-                    Image pastImage = GetClipboardImage();
-                    PasteImage(pastImage);
+                    Image pasteImage = GetClipboardImage();
+                    PasteImage(pasteImage);
                 }
             }
         }
@@ -98,25 +99,7 @@ namespace stikkPop
 
         public void PasteImage(Image pasteImage)
         {
-            string imagePath = Path.GetTempFileName();
-            pasteImage.Save(imagePath, pasteImage.RawFormat);
-
-            string endpointURL = "https://api.imgur.com/3/image";
-
-            WebClient client = new WebClient();
-            client.Headers.Add("Authorization", "Client-ID 6a67b5ef855d926");
-
-            var values = new NameValueCollection
-            {
-                {"image", Convert.ToBase64String(File.ReadAllBytes(imagePath))}
-            };
-
-            byte[] responseArray = client.UploadValues(endpointURL, values);
-
-            string json = Encoding.ASCII.GetString(responseArray);
-            JObject o = JObject.Parse(json);
-            pasteURL = o["data"]["link"].ToString();
-
+            pasteURL = Imgur.Upload(pasteImage);
             handleUrl();
         }
 
@@ -344,6 +327,45 @@ namespace stikkPop
         private void openStikkedLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start(Settings.Default["EndPoint"].ToString());
+        }
+
+        private void screenshotButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            ShowRubberBand();
+        }
+
+        private void ShowRubberBand()
+        {
+            using (RubberBand rbf = new RubberBand(this))
+            {
+
+                rbf.ShowDialog();
+
+                Size sLastSize = rbf.lastSize;
+
+                if (sLastSize.Width > 0 && sLastSize.Height > 0)
+                {
+                    Rectangle r = new Rectangle();
+                    r.Location = rbf.lastLoc;
+                    r.Size = sLastSize;
+                    CaptureBitmap(r);
+                }
+            }
+
+            this.Show();
+        }
+
+        private void CaptureBitmap(Rectangle r)
+        {
+            bitmap = new Bitmap(r.Width, r.Height);
+
+            using (Graphics g = Graphics.FromImage(bitmap))
+            {
+                g.CopyFromScreen(r.Location, new Point(0, 0), r.Size);
+            }
+
+            PasteImage(bitmap);
         }
     }
     public class Expiry

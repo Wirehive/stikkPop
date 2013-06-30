@@ -15,14 +15,11 @@ namespace stikkPop
 {
     public partial class Configure : Form
     {
+        System.Windows.Forms.Timer TestHTTP200Timer = new System.Windows.Forms.Timer();
+
         public Configure()
         {
             InitializeComponent();
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void CancelBtn_Click(object sender, EventArgs e)
@@ -42,12 +39,13 @@ namespace stikkPop
             this.Close();
         }
 
-        System.Windows.Forms.Timer TestHTTP200Timer = new System.Windows.Forms.Timer();
+        
         private void Configure_Load(object sender, EventArgs e)
         {
             //Set initial dialog state
             syntaxBox.DataSource = Startup.syntaxList;
             syntaxBox.SelectedItem = Settings.Default["syntax"];
+            updateImgurAuthenticatedVisibility();
 
             //Validate endpoint URL 
             TestHTTP200(endpointBox.Text + "/api/create");
@@ -63,7 +61,6 @@ namespace stikkPop
             TestHTTP200Timer.Stop();
             TestHTTP200Timer.Start();
         }
-
 
         private void TestHTTP200TimerEnd(Object myObject, EventArgs myEventArgs)
         {
@@ -129,14 +126,38 @@ namespace stikkPop
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            Imgur.RequestPin();
         }
 
-        private void label11_Click(object sender, EventArgs e)
+        private void validateImgurPIN(object sender, EventArgs e)
         {
+            ImgurToken Token = Imgur.GetToken(PINbox.Text);
+            Settings.Default["imgurAccessToken"] = Token.AccessToken;
+            Settings.Default["imgurRefreshToken"] = Token.RefreshToken;
+            Settings.Default["imgurTokenExpires"] = DateTime.Now.AddSeconds(Convert.ToDouble(Token.ExpiresIn)-120);
 
+            updateImgurAuthenticatedVisibility();
+        }
+
+        private void logOutButton_Click(object sender, EventArgs e)
+        {
+            Settings.Default["imgurAuthenticated"] = false;
+            Settings.Default["imgurAccessToken"] = null;
+            Settings.Default["imgurRefreshToken"] = null;
+            updateImgurAuthenticatedVisibility();
+        }
+
+        private void updateImgurAuthenticatedVisibility()
+        {
+            loginLink.Visible = !(bool)Settings.Default["imgurAuthenticated"];
+            labelYourPin.Visible = !(bool)Settings.Default["imgurAuthenticated"];
+            PINbox.Visible = !(bool)Settings.Default["imgurAuthenticated"];
+            validateButton.Visible = !(bool)Settings.Default["imgurAuthenticated"];
+
+            autheticatedLabel.Visible = (bool)Settings.Default["imgurAuthenticated"];
+            logOutButton.Visible = (bool)Settings.Default["imgurAuthenticated"];
         }
     }
 }
