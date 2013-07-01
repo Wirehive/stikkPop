@@ -199,6 +199,7 @@
             this.openStikkedLink.TabIndex = 15;
             this.openStikkedLink.TabStop = true;
             this.openStikkedLink.Text = "History";
+            this.openStikkedLink.Visible = false;
             this.openStikkedLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.historyLink_LinkClicked);
             // 
             // screenshotButton
