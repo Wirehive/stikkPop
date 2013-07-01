@@ -175,7 +175,6 @@
             this.tick.TabIndex = 13;
             this.tick.TabStop = false;
             this.tick.Visible = false;
-            this.tick.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // cross
             // 
@@ -322,7 +321,6 @@
             this.privateCheckBox.TabIndex = 4;
             this.privateCheckBox.Text = "Always Private";
             this.privateCheckBox.UseVisualStyleBackColor = true;
-            this.privateCheckBox.CheckedChanged += new System.EventHandler(this.privateCheckBox_CheckedChanged);
             // 
             // nameBox
             // 

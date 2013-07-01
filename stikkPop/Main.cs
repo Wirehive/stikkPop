@@ -199,6 +199,8 @@ namespace stikkPop
         {
             urlBox.Text = pasteURL;
 
+            History.AddHistory(DateTime.Now.ToString(), pasteURL);
+
             if ((bool)Settings.Default["autoCopy"] == true)
             {
                 Clipboard.SetText(urlBox.Text);
@@ -211,7 +213,10 @@ namespace stikkPop
 
             if ((bool)Settings.Default["autoOpen"] == true)
             {
-                System.Diagnostics.Process.Start(urlBox.Text);
+                if (pasteURL != "")
+                {
+                    System.Diagnostics.Process.Start(urlBox.Text);
+                }
             }
         }
 
@@ -324,9 +329,10 @@ namespace stikkPop
             composerDialog.Show();
         }
 
-        private void openStikkedLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void historyLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start(Settings.Default["EndPoint"].ToString());
+            History historyDialog = new History();
+            historyDialog.Show();
         }
 
         private void screenshotButton_Click(object sender, EventArgs e)
