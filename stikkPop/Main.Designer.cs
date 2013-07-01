@@ -52,7 +52,7 @@
             // configureLink
             // 
             this.configureLink.AutoSize = true;
-            this.configureLink.Location = new System.Drawing.Point(173, 307);
+            this.configureLink.Location = new System.Drawing.Point(173, 305);
             this.configureLink.Name = "configureLink";
             this.configureLink.Size = new System.Drawing.Size(52, 13);
             this.configureLink.TabIndex = 9;
@@ -193,13 +193,14 @@
             // openStikkedLink
             // 
             this.openStikkedLink.AutoSize = true;
-            this.openStikkedLink.Location = new System.Drawing.Point(13, 308);
+            this.openStikkedLink.Location = new System.Drawing.Point(13, 306);
             this.openStikkedLink.Name = "openStikkedLink";
-            this.openStikkedLink.Size = new System.Drawing.Size(72, 13);
+            this.openStikkedLink.Size = new System.Drawing.Size(39, 13);
             this.openStikkedLink.TabIndex = 15;
             this.openStikkedLink.TabStop = true;
-            this.openStikkedLink.Text = "Open Stikked";
-            this.openStikkedLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.openStikkedLink_LinkClicked);
+            this.openStikkedLink.Text = "History";
+            this.openStikkedLink.Visible = false;
+            this.openStikkedLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.historyLink_LinkClicked);
             // 
             // screenshotButton
             // 
@@ -217,7 +218,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(239, 329);
+            this.ClientSize = new System.Drawing.Size(239, 330);
             this.Controls.Add(this.screenshotButton);
             this.Controls.Add(this.openStikkedLink);
             this.Controls.Add(this.composeButton);

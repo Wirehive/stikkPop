@@ -29,7 +29,7 @@ namespace stikkPop
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
-            Settings.Default["endpoint"] = endpointBox.Text;
+            Settings.Default["endpoint"] = GetUri(endpointBox.Text).ToString();
             Settings.Default["syntax"] = syntaxBox.SelectedValue;
             Settings.Default["name"] = nameBox.Text;
             Settings.Default["alwaysPrivate"] = privateCheckBox.Checked;
@@ -38,7 +38,6 @@ namespace stikkPop
             Settings.Default.Save();
             this.Close();
         }
-
         
         private void Configure_Load(object sender, EventArgs e)
         {
@@ -65,17 +64,13 @@ namespace stikkPop
         private void TestHTTP200TimerEnd(Object myObject, EventArgs myEventArgs)
         {
             TestHTTP200Timer.Stop();
-            TestHTTP200(endpointBox.Text+"/api/create");
+            string testEndpoint = GetUri(endpointBox.Text) + "/api/create";
+            TestHTTP200(testEndpoint);
         }
 
-        private void privateCheckBox_CheckedChanged(object sender, EventArgs e)
+        public static Uri GetUri(string s)
         {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
+            return new UriBuilder(s).Uri;
         }
 
         private void TestHTTP200(string url="empty")
